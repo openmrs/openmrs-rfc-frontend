@@ -2,7 +2,7 @@
 - Start Date: Put Start Date Here
 - RFC PR: https://github.com/openmrs/openmrs-rfc-frontend/pull/1
 
-## How does this apply to distributions?
+## Decision, including impact on distributions
 Example:
 All distributions and modules should use the @open-mrs/auth module for authenticating requests to the backend REST API.
 
