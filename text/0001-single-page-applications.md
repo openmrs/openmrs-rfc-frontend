@@ -1,5 +1,5 @@
 # Single Page Applications
-- Start Date: 04/23/2019
+- Start Date: 2019/04/23
 - RFC PR: https://github.com/openmrs/openmrs-rfc-frontend/pull/1
 
 ## Decision, including impact on distributions

@@ -1,5 +1,5 @@
 # Project title
-- Start Date: Put Start Date Here
+- Start Date: YYYY/MM/DD
 - RFC PR: https://github.com/openmrs/openmrs-rfc-frontend/pull/1
 
 ## Decision, including impact on distributions
