@@ -16,7 +16,7 @@ to retrieve data from the backend.
 
 ## Reason for decision
 - SPAs are the industry standard for large web apps.
-- SPAs are faster for users that visit many pages within an app. You pay an upfront performance cost with the initial load time, in order to avoid
+- SPAs are often faster for users that visit many pages within an app. You pay an upfront performance cost with the initial load time, in order to avoid
 subsequent page reloads.
 - The tooling and developer experience for SPAs is preferred over server rendered pages.
 
