@@ -26,17 +26,18 @@ that there is only one network request for a whole group (bundle) of build-time 
 [Browser support for modules](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export#Browser_compatibility)
 started in Chrome 61, Firefox 60, Edge 16, and Safari 10.1. Internet Explorer does not support modules.
 
-A module loader is a javascript library that allows you to use modules in a browser that does not support them. This makes
-it possible for us to use modules in Internet Explorer.
+A [module loader](https://www.jvandemo.com/a-10-minute-primer-to-javascript-modules-module-formats-module-loaders-and-module-bundlers/) is
+a javascript library that allows you to use modules in a browser that does not support them. This makes it possible for us to use modules
+in Internet Explorer.
 
 [SystemJS](https://github.com/systemjs/systemjs) is a minimalistic module loader that
 [polyfills](https://en.wikipedia.org/wiki/Polyfill_(programming)) modules so that you can use them in older browsers.
 When browsers fully support modules, the browser will be able to do what SystemJS is currently doing for us.
 
 ## Reason for decision
-- Modules are a well-known programming language feature that allow for extensibility and separation of concerns.
-- Modules allow distribution implementors and maintainers to extend OpenMRS by using a browser spec, instead of something
-OpenMRS-specific. This means that extending OpenMRS is better understood and more approachable for the frontend community.
+- Modules are a built-in programming language feature that allows us to easily extend the OpenMRS frontend.
+- Modules allow distribution implementors and maintainers to extend OpenMRS functionality via a browser spec, instead of something
+OpenMRS-specific. This means that the process for extending OpenMRS is better understood and more approachable for frontend developers.
 - Modules create better [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns), since dependencies
 between modules are explicit and do not rely on global variables.
 - Modules can be lazy loaded, or not loaded at all. This allows OpenMRS distributions to choose which modules they wish
@@ -53,5 +54,5 @@ since you ultimately must rely on load-order and global variables for code to in
 Dependencies between global variables are not explicit and harder to manage.
 
 ## Common practices (not enforced)
-- When implementing frontend code at OpenMRS, bundle many build-time modules into a single in-browser module by using a javascript bundler.
-- Create only one in-browser module for your application's components, instead of one in-browser module for each component.
+- Use build-time modules liberally, to better organize your code.
+- Create only one in-browser module for all your application's components, instead of one in-browser module for each component.
