@@ -15,7 +15,7 @@ exported.
 
 Javascript modules are also known as ECMAScript modules, ES modules, ESM, ES2015 modules, or ES6 modules.
 
-An in-browser javascript module is a javascript module that is loaded in the browser. This is different from
+An in-browser javascript module is a javascript module that is downloaded in the browser. This is different from
 build-time modules, which are compiled down so that they know longer use `import` or `export` by the time they
 are executed in the browser. Most major frameworks (React, Vue, Angular, etc) always use build-time modules, but do not
 always use in-browser modules. At OpenMRS, we use both.
@@ -23,12 +23,13 @@ always use in-browser modules. At OpenMRS, we use both.
 In-browser javascript modules are downloaded with one network request per module. Build-time modules are compiled away such
 that there is only one network request for a whole group (bundle) of build-time modules.
 
-[Browser support for modules](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export#Browser_compatibility)
-started in Chrome 61, Firefox 60, Edge 16, and Safari 10.1. Internet Explorer does not support modules.
+[Basic browser support for modules](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export#Browser_compatibility)
+started in Chrome 61, Firefox 60, Edge 16, and Safari 10.1. There are advanced module features, such as import maps, that are not yet
+supported in any browser. Internet Explorer does not have any support for modules.
 
 A [module loader](https://www.jvandemo.com/a-10-minute-primer-to-javascript-modules-module-formats-module-loaders-and-module-bundlers/) is
-a javascript library that allows you to use modules in a browser that does not support them. This makes it possible for us to use modules
-in Internet Explorer.
+a javascript library that allows you to use modules in a browser that does not support them. This makes it possible for us to use both basic and advanced
+module features in all browsers.
 
 [SystemJS](https://github.com/systemjs/systemjs) is a minimalistic module loader that
 [polyfills](https://en.wikipedia.org/wiki/Polyfill_(programming)) modules so that you can use them in older browsers.
