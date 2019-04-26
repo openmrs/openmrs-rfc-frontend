@@ -34,7 +34,7 @@ npm packages.
 ## Reason for decision
 - Not supporting older browers greatly enhances the frontend developer's ability to quickly build quality functionality.
 - Not supporting older browsers allows us to have smaller javascript bundles, which means less code to download and execute in the browser.
-- OpenMRS is usually run by people who can be instructed by modern browsers.
+- OpenMRS is usually used by people who can be instructed by modern browsers.
 
 ## Alternatives
 We could either not define which browsers we support, or we could support older browsers. The former means we wouldn't be certain whether a browser-specific
