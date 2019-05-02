@@ -7,7 +7,7 @@ Within the [OpenMRS master single page application](/text/0001-single-page-appli
 of the [in-browser javascript modules](/text/0002-modules.md) should be downloaded from. Since import maps are not supported by all browsers yet,
 we use SystemJS to polyfill import maps.
 
-All in-browser OpenMRS core modules and their URLs will be defined in an import map. Distributions are encouraged to add their in-browser modules to an import map, too.
+All in-browser OpenMRS core modules and their URLs are defined in an import map. Distributions are encouraged to add their in-browser modules to an import map, too.
 
 ## Definition
 An [import map](https://github.com/WICG/import-maps) is a browser specification for controlling the url to download in-browser javascript modules from. At the
@@ -35,7 +35,7 @@ To use browser import maps, you add a `<script>` element to your html page:
 </html>
 ```
 
-Because import maps are not implemented in browsers yet, we will use [SystemJS](https://github.com/systemjs/systemjs) as a polyfill for import maps.
+Because import maps are not implemented in browsers yet, we use [SystemJS](https://github.com/systemjs/systemjs) as a polyfill for import maps.
 The syntax for SystemJS import maps is slightly different than the specification:
 
 ```html
