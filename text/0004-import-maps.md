@@ -73,8 +73,8 @@ You may also specify a download url for the import map itself:
 - Instead of building a home-grown solution for controlling the URLs for javascript modules, we prefer to use a browser specification.
 
 ## Alternatives
-- We could not use in-browser modules
-- We could build a homegrown solution for controlling the download url for in-browser modules
+- We could not use in-browser modules.
+- We could build a homegrown solution for controlling the download url for in-browser modules.
 - We could only rely on the fully qualified url for all in-browser modules, instead of naming them.
 
 ## Common practices (not enforced)
