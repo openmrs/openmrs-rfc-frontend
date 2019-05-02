@@ -1,4 +1,4 @@
-# Project title
+# Browser support
 - Start Date: 2019/04/26
 - RFC PR: https://github.com/openmrs/openmrs-rfc-frontend/pull/3
 
