@@ -11,7 +11,7 @@ All in-browser OpenMRS core modules and their URLs are defined in an import map.
 
 ## Definition
 An [import map](https://github.com/WICG/import-maps) is a browser specification for controlling the url to download in-browser javascript modules from. At the
-time of this writing, import maps are currently are a proposal that has not yet been voted on by major browsers and stakeholders. However, Chrome has already
+time of this writing, import maps are currently a proposal that has not yet been voted on by major browsers and standards bodies. However, Chrome has already
 implemented import maps behind a developer feature flag. The [WICG](https://wicg.github.io/admin/charter.html) is the organization backing and proposing import
 maps, with Domenic Denicola being the chief author of the proposal.
 
@@ -48,7 +48,7 @@ The syntax for SystemJS import maps is slightly different than the specification
         }
       }
     </script>
-    <script src="https://unpkg.com/systemjs"><script>
+    <script src="https://unpkg.com/systemjs"></script>
 
     <script>
       System.import('@openmrs/styleguide').then(styleguide => {
