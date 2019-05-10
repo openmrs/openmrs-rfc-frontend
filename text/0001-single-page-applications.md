@@ -18,14 +18,23 @@ to retrieve data from the backend.
 - SPAs are the industry standard for large web apps.
 - SPAs are often faster for users that visit many pages within an app. You pay an upfront performance cost with the initial load time, in order to avoid
 subsequent page reloads.
+- A shared SPA sets up OpenMRS for a cohesive codebase and UX.
 - The tooling and developer experience for SPAs is preferred over server rendered pages.
 
 ## Alternatives
-The alternative to SPAs is server rendered HTML files for each frontend route. This means that the page reloads whenever the user navigates.
+One alternative to SPAs is server rendered HTML files for each frontend route. This means that the page reloads whenever the user navigates.
 Server rendered HTML pages can be implemented with technologies such as JSPs, GSPs, and a variety of other tools. They are often better for
 Search Engine Optimization (SEO) and can rely on native browser form submission instead of Fetch/AJAX to communicate with the backend. Server
 rendered HTML files often have faster initial load times than SPAs, because the browser can create DOM elements without waiting on client-side
 javascript. Additionally, server rendered pages often require far less frontend javascript code to work properly.
+
+Another alternative is to have multiple SPAs instead of one SPA. See
+[this discussion](https://github.com/openmrs/openmrs-rfc-frontend/pull/1#discussion_r279612852) for some discussion of pros and cons for it.
+An advantage of multiple SPAs is that it does not require trying to get multiple
+separate apps working within a single page, nor multiple frameworks coexisting within a single page. Additionally, sometimes a page reload
+can help free memory from a runaway browser tab. The main disadvantage of multiple SPAs is that there is a page reload between the pages,
+and that frequent page reloads exacerbate the downsides of SPAs. Additionally, it is harder to guarantee that shared code between SPAs
+is always exactly the same and up-to-date, since each HTML file can include whichever libraries it wants to.
 
 ## Common practices (not enforced)
 - [Configure your backend server](https://blog.pshrmn.com/entry/single-page-applications-and-the-server/) to interoperate with SPAs.
