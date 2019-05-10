@@ -7,6 +7,8 @@ Core OpenMRS frontend modules will be implemented within a master single page ap
 to add modules to the master single page application. Older OpenMRS modules implemented with JSPs and GSPs are not addressed in this
 proposal, but will be covered in another one.
 
+The code for the master single page application is hosted at https://github.com/openmrs/openmrs-module-spa.
+
 ## Definition
 A [single page application (SPA)](https://en.wikipedia.org/wiki/Single-page_application) is a frontend application that does not
 reload the page when the user navigates. This is accomplished by having only one full html file, using the
