@@ -49,10 +49,16 @@ Reviewers can make comments asking for changes or they can challenge the basis o
 If a pull request becomes stale (not updated or talked about after a fewish weeks), close it.
 
 ### Step 3 - Approval
-Once the author and reviewers have commented and the discussion and proposal have stabilized, the proposal will be merged or closed. The process for approval
-will start out fairly loose and can be refined over time. To start out, we'll shoot for consensus among participants and OpenMRS maintainers, and fall back
-to OpenMRS leaders when consensus cannot be reached.
+Once the author and reviewers have commented and the discussion and proposal have stabilized, the proposal will be merged or closed.
+Approval must be given by three members of the "microfrontends squad" (as defined below) must indicate on the PR that they approve.
+
+Current members of the microfrontends squad:
+- @joeldenning
+- @Fatmali (Ampath)
+- @brandones (PIH)
+- @angshu (Bahmni)
+
+Other groups who'd like to participate in the microfrontends squad can contact the squad on Talk.
 
 ### Step 4 - Implementation
-Once a proposal is merged, it is now part of the RFC. The changes or additions to the RFC apply to the whole frontend and we should make whatever
-changes are needed to our code, processes, and organization.
+Once a proposal is merged, it is now part of the RFC. This means that we intend to implement what is described in the RFC. The changes or additions to the RFC apply to the whole frontend and we should make whatever changes are needed to our code, processes, and organization.
