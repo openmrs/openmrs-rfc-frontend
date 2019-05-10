@@ -34,10 +34,10 @@ An SPA is a single page application, as [defined here](/text/0001-single-page-ap
 ways of building server rendered pages within a [Tomcat](https://en.wikipedia.org/wiki/Apache_Tomcat) server (in our case,
 [openmrs-core](https://github.com/openmrs/openmrs-core/) is our Tomcat server).
 
-A full page reload is when the user clicks on a link and the browser asks the server for new HTML.
+A full page reload is when the user clicks on a link and the browser unloads the current page, asking the server to send new HTML.
 
 ## Reason for decision
-- See related https://talk.openmrs.org/t/an-amazing-future-for-openmrs/22328/1 for some thoughts from Burke
+- See [An Amazing Future for OpenMRS](https://talk.openmrs.org/t/an-amazing-future-for-openmrs/22328/1) for some thoughts from Burke
 on moving away from JSPs/GSPs.
 - See [reasons for a single page application](/text/0001-single-page-applications.md#reason-for-decision).
 
