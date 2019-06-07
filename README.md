@@ -57,6 +57,7 @@ Current members of the microfrontends squad:
 - @Fatmali (Ampath)
 - @brandones (PIH)
 - @angshu (Bahmni)
+- @ojwanganto (Kenya EMR)
 
 Other groups who'd like to participate in the microfrontends squad can contact the squad on Talk.
 
