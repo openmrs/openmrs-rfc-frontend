@@ -1,9 +1,9 @@
 # Styleguide javascript components
 - Start Date: 2019/06/07
-- RFC PR: https://github.com/openmrs/openmrs-rfc-frontend/pull/7
+- RFC PR: https://github.com/openmrs/openmrs-rfc-frontend/pull/9
 
 ## Decision, including impact on distributions
-Javascript components in the [OpenMRS styleguide](/text/0006-styleguide.md) are implemented such that
+Javascript components in the [OpenMRS styleguide](/text/0008-styleguide.md) are implemented such that
 they can be used by any framework, including React, Angular, Vue, and more.
 
 To achieve framework agnosticism, styleguide components are implemented as
