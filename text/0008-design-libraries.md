@@ -3,8 +3,8 @@
 - RFC PR: https://github.com/openmrs/openmrs-rfc-frontend/pull/8
 
 ## Decision, including impact on distributions
-The [OpenMRS styleguide](/text/0006-styleguide.md) does not use a third party design library's code (such as Material,
-Semantic UI, etc.). Instead, the styleguide is built from scratch in collaboration with UX designers in the OpenMRS community.
+The [OpenMRS styleguide](/text/0006-styleguide.md) does not use a third party design library's code (such as Twitter Bootstrap,
+Material, Semantic UI). Instead, the styleguide is built from scratch in collaboration with UX designers in the OpenMRS community.
 UX principles and design elements are liberally borrowed from other design systems and libraries, but the code for the
 OpenMRS styleguide is written by the OpenMRS community.
 
@@ -17,8 +17,8 @@ A design library is a third-party javascript library that provides pre-written c
 are installed into code and are often used by the frontend community for base-level components (such as buttons, form elements,
 and tooltips).
 
-At the time of this writing, [Material Design]() (from Google)
-and [Semantic UI]() are two popular design libraries.
+At the time of this writing, [Material UI](https://material-ui.com/) (from Google), [Twitter Bootstrap](https://getbootstrap.com/),
+and [Semantic UI](https://semantic-ui.com/) are a few of the popular design libraries.
 
 A custom build of a design library is a customized version of such a library. Customizations often include things like custom
 css class naming, additional css class definitions, and custom branding variables. Design libraries often provide a
