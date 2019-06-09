@@ -1,9 +1,9 @@
 # The Styleguide and Design Libraries
 - Start Date: 2019/06/08
-- RFC PR: https://github.com/openmrs/openmrs-rfc-frontend/pull/8
+- RFC PR: https://github.com/openmrs/openmrs-rfc-frontend/pull/10
 
 ## Decision, including impact on distributions
-The [OpenMRS styleguide](/text/0006-styleguide.md) does not use a third party design library's code (such as Twitter Bootstrap,
+The [OpenMRS styleguide](/text/0008-styleguide.md) does not use a third party design library's code (such as Twitter Bootstrap,
 Material, Semantic UI). Instead, the styleguide is built from scratch in collaboration with UX designers in the OpenMRS community.
 UX principles and design elements are liberally borrowed from other design systems and libraries, but the code for the
 OpenMRS styleguide is written by the OpenMRS community.
