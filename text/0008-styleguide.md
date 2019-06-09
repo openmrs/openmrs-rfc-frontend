@@ -1,6 +1,6 @@
 # Styleguide
 - Start Date: 2019/06/08
-- RFC PR: https://github.com/openmrs/openmrs-rfc-frontend/pull/6
+- RFC PR: https://github.com/openmrs/openmrs-rfc-frontend/pull/8
 
 ## Decision, including impact on distributions
 The OpenMRS styleguide is an [in-browser javascript module](/text/0002-modules.md) that helps OpenMRS UI
