@@ -1,0 +1,47 @@
+# The Styleguide and Design Libraries
+- Start Date: 2019/06/08
+- RFC PR: https://github.com/openmrs/openmrs-rfc-frontend/pull/8
+
+## Decision, including impact on distributions
+The [OpenMRS styleguide](/text/0006-styleguide.md) does not use a third party design library's code (such as Material,
+Semantic UI, etc.). Instead, the styleguide is built from scratch in collaboration with UX designers in the OpenMRS community.
+UX principles and design elements are liberally borrowed from other design systems and libraries, but the code for the
+OpenMRS styleguide is written by the OpenMRS community.
+
+Distributions should use the OpenMRS styleguide as the primary source of making a consistent user experience, look and feel,
+layout, and base-level components. In addition to the OpenMRS styleguide, distributions may use design libraries if they prefer to.
+However, it is not necessary (nor encouraged) to do so.
+
+## Definition
+A design library is a third-party javascript library that provides pre-written css and javascript components. Design libraries
+are installed into code and are often used by the frontend community for base-level components (such as buttons, form elements,
+and tooltips).
+
+At the time of this writing, [Material Design]() (from Google)
+and [Semantic UI]() are two popular design libraries.
+
+A custom build of a design library is a customized version of such a library. Customizations often include things like custom
+css class naming, additional css class definitions, and custom branding variables. Design libraries often provide a
+well-supported way to create a custom build of their library. Organizations can use custom builds instead of the generic version
+of the library to make the design library their own.
+
+## Reason for decision
+- Upgrading design libraries is often very difficult because breaking changes span across an organization's entire
+  frontend codebase. Many organizations get stuck on a particular version of a design library and end up having to
+  rewrite much of their code to be able to upgrade or switch to a different design library.
+- Because of trying to be useful to all organizations in the world, design libraries are often big and bloated. They
+  include many features that are unnecessary or even damaging to a user experience when used inappropriately. It is
+  difficult for feature developers to know which parts of the design library to use or not.
+- Implementing our own styleguide is not intractably difficult. It is something that perhaps the majority of large
+  organizations do. Implementation of a styleguide can be iterative and incremental. Not everything needs to be
+  decided upfront or implemented all at once. It is better to start with something effective and simple than
+  comprehensive.
+- Bug fixing a design library is harder than bug fixing OpenMRS code.
+
+## Alternatives
+The alternative is to use a design library such as Material Design or similar.
+
+## Common practices (not enforced)
+- Distribution code should use the OpenMRS styleguide as much as possible, and should consider not bringing in a design library.
+- OpenMRS developers should contribute to the OpenMRS styleguide when they find bugs or missing features in it. Doing so fosters
+  the health and usability of the styleguide by all distributions.
