@@ -20,7 +20,7 @@ The styleguide should be used by all OpenMRS modules and by all distribution cod
 ## Definition
 A styleguide consists of [css classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors),
 [css custom properties (css variables)](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties),
-and [javascript components](/text/0007-styleguide-components.md). These three things create the foundation for
+and [javascript components](/text/0009-styleguide-components.md). These three things create the foundation for
 building a UI that has a consistent user experience.
 
 Global css custom properties are defined with the `openmrs` prefix:
@@ -40,7 +40,7 @@ Global css classes are named with the `openmrs` prefix, so that it is easy to de
 ```
 
 Javascript components for the styleguide are a big topic, and as such they are discussed in their own RFC proposal:
-[Styleguide Components RFC](/text/0007-styleguide-components.md).
+[Styleguide Components RFC](/text/0009-styleguide-components.md).
 
 ## Reason for decision
 - User experience matters. For many users, the user experience determines whether a web app feels fast, modern, and simple.
@@ -60,7 +60,7 @@ client rendered within the SPA. However, the old styleguide is not very well kno
 Starting from scratch gives us a clean slate to make intentional and good decisions, for both the UX design and software development.
 
 The OpenMRS styleguide could be a custom build of an existing design library, such as Material, SemanticUI, and others.
-Using such a existing design library is discussed in [the Design Libraries RFC Proposal](/text/0008-design-libraries.md).
+Using such a existing design library is discussed in [the Design Libraries RFC Proposal](/text/0010-design-libraries.md).
 
 The OpenMRS styleguide could not expose any global in-browser css custom properties (css variables). Instead, it could require all users of
 the styleguide to rely solely on css classes, or require all frontend code to use a css compiler such as SASS or LESS. Doing so doesn't make
