@@ -29,6 +29,12 @@ of the library to make the design library their own.
 - Upgrading design libraries is often very difficult because breaking changes span across an organization's entire
   frontend codebase. Many organizations get stuck on a particular version of a design library and end up having to
   rewrite much of their code to be able to upgrade or switch to a different design library.
+- Backwards compatibility is especially important for the styleguide, since it is shared by everything else. It is
+  difficult to not get stuck on an old version of a design library when upgrading it impacts all frontend code at once.
+  Backwards compatibility is easier to achieve when (1) you have control over the code that needs to be backwards compatible,
+  and (2) you have a minimal API surface (which in this case, means having fewer css classes and javascript components).
+  This is easier to accomplish if we maintain our own. See [this github thread](https://github.com/openmrs/openmrs-rfc-frontend/pull/10#discussion_r292105076)
+  for more discussion.
 - Because of trying to be useful to all organizations in the world, design libraries are often big and bloated. They
   include many features that are unnecessary or even damaging to a user experience when used inappropriately. It is
   difficult for feature developers to know which parts of the design library to use or not.
