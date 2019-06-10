@@ -101,7 +101,7 @@ OpenMRS could choose not to expose javascript components in the styleguide, but 
   to or maintain the styleguide. A soft suggestion, at the time of this writing, is to use [stenciljs](https://stenciljs.com/)
   within the styleguide to implement the web components. This is because it is well-established, has a familiar syntax for frontend devs,
   and allows us not to worry about some of the nuanced behavior related to web components.
-- Implement the styleguide's web components such that it doesn't matter whether the code using the component passes data as an
+- Implement the styleguide's web components such that it doesn't matter whether the code using the component passes data as a
   DOM element attribute or a DOM element property. Stenciljs and similar libraries do this by default.
 - Use both DOM element properties and DOM element attributes as mechanisms to pass data to web components. DOM attributes are best for
   short strings (`<cps-tooltip text="Save">), whereas properties are best for other data types and longer strings that would hurt the
