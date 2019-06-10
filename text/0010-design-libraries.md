@@ -29,6 +29,9 @@ of the library to make the design library their own.
 - Upgrading design libraries is often very difficult because breaking changes span across an organization's entire
   frontend codebase. Many organizations get stuck on a particular version of a design library and end up having to
   rewrite much of their code to be able to upgrade or switch to a different design library.
+- Maintaining our own styleguide enables UX designers in the OpenMRS community. When using a third-party design
+  library, developers often tell a designer "well that's just not possible" or "that's not how <design library> does it."
+  In other words, many design decisions are made by the third party library, and not by designers within the OpenMRS ecosystem.
 - Backwards compatibility is especially important for the styleguide, since it is shared by everything else. It is
   difficult to not get stuck on an old version of a design library when upgrading it impacts all frontend code at once.
   Backwards compatibility is easier to achieve when (1) you have control over the code that needs to be backwards compatible,
