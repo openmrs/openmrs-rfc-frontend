@@ -104,7 +104,7 @@ OpenMRS could choose not to expose javascript components in the styleguide, but 
 - Implement the styleguide's web components such that it doesn't matter whether the code using the component passes data as a
   DOM element attribute or a DOM element property. Stenciljs and similar libraries do this by default.
 - Use both DOM element properties and DOM element attributes as mechanisms to pass data to web components. DOM attributes are best for
-  short strings (`<cps-tooltip text="Save">), whereas properties are best for other data types and longer strings that would hurt the
+  short strings (`<cps-tooltip text="Save">`), whereas properties are best for other data types and longer strings that would hurt the
   readability of the HTML.
 - Use DOM element property callback functions instead of DOM element events as the mechanism for passing data from the web component to
   the code using the web component. Although, [Rob Dodson recommends otherwise](https://robdodson.me/interoperable-custom-elements/),
