@@ -75,7 +75,7 @@ set up and get going in everyone's framework and build process.
 
 The OpenMRS styleguide could not expose javascript components, but only css. This option would ensure the highest level of compatibility
 with javascript frameworks and codebases, since javascript components are much harder than css to use in all situations. See
-[the styleguide components proposal](/textt/0007-styleguide.components.md) for more discussion about this.
+[the styleguide components proposal](/text/0007-styleguide.components.md) for more discussion about this.
 
 ## Common practices (not enforced)
 - Use existing styleguide css and components whenever possible during feature development.
