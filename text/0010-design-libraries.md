@@ -8,6 +8,8 @@ Material, Semantic UI). Instead, the styleguide is built from scratch in collabo
 UX principles and design elements are liberally borrowed from other design systems and libraries, but the code for the
 OpenMRS styleguide is written by the OpenMRS community.
 
+The decision to embrace one or multiple design libraries for non-code resources will be made separately.
+
 Distributions should use the OpenMRS styleguide as the primary source of making a consistent user experience, look and feel,
 layout, and base-level components. In addition to the OpenMRS styleguide, distributions may use design libraries if they prefer to.
 However, it is not necessary (nor encouraged) to do so.
