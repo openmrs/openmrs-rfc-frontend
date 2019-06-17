@@ -13,14 +13,15 @@ The namespace for module based features, which will leverage existing modules wi
 - `@openmr/module/appointmentscheduling` for appointment scheduling 
 
 ## Implementing Partner and Distributions 
-The namespace for partners will be as follows
-- `@openmrs/reference-application/` for the Reference Application 
-- `@openmrs/ugandaemr/` for UgandaEMR 
-- `@openmrs/ampath/` for Ampath specific needs 
-- `@openmrs/hiv` for an HIV based distribution 
+The namespace for distributions and partners will be as follows
+- `@openmrs/distro/reference-application/` for the Reference Application 
+- `@openmrs/distro/ugandaemr/` for UgandaEMR
+- `@openmrs/distro/hiv` for an HIV based distribution (does not exist - but if one was to be built)
+- `@openmrs/ampath/` for Ampath specific needs. The name would map to an already owned domain name for clarity
 
 ## Reason for decision
 - To provide a guide for naming modules to ease the process of discoverability  
+- The premise is that there will also be very 
 
 ## Alternatives
 - N/A 
