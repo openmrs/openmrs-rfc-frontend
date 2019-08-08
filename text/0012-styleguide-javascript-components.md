@@ -5,8 +5,8 @@
 
 ## Decision, including impact on distributions
 The [OpenMRS styleguide](/text/0008-styleguide.md) provides a CSS-first API to be used by all
-frontend code at OpenMRS. Framework-specific Javascript components (for React, Vue, and/or Angular) will be
-implemented when convenient, but are not required for using the styleguide's global css classes.
+frontend code at OpenMRS. For the few elements for which JavaScript components are required (e.g. multiselect),
+the Styleguide will provide framework-specific components in React, Vue, Angular, and/or other frameworks.
 
 ## Definition
 "Javascript component" refers to javascript code that encapsulates the logic for creating and updating
