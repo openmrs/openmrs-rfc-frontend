@@ -40,7 +40,7 @@ Global css classes are named with the `openmrs` prefix, so that it is easy to de
 ```
 
 Javascript components for the styleguide are a big topic, and as such they are discussed in their own RFC proposal:
-[Styleguide Components RFC](/text/0009-styleguide-components.md).
+[Styleguide Components RFC](/text/0012-styleguide-components.md).
 
 ## Reason for decision
 - User experience matters. For many users, the user experience determines whether a web app feels fast, modern, and simple.
