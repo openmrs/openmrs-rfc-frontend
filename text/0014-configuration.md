@@ -71,3 +71,8 @@ Developers would probably not actually use this tooling, since it wouldn’t be
 meaningfully integrated into their application. It would reduce config 
 validation and documentation to “best practices” which would likely often be ignored.
 
+## Common practices (not enforced)
+
+Wherever possible, developers should be encouraged to make things configurable
+rather than writing implementation-specific code. Emphasis on configurability
+will allow more collaboration, which will yield a higher-quality product.
