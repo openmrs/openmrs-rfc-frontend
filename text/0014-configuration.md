@@ -22,7 +22,7 @@ Microfrontend developers should use the official OpenMRS MF Config Library.
 The Config Library should be a JavaScript module that
 *   Provides an API for modules to define a config schema
 *   Provides an API for modules to access config values
-*   Looks for config files in an implementation’s esm-root-config (or using the Import Map)
+*   Provides an API for implementations to provide config files
 *   Validates config files in non-production environments
 *   Generates documentation for config schemas
 *   Provides an API for an implementation’s esm-root-config to specify a config file or a hierarchy of config files
@@ -45,9 +45,6 @@ For having a config library
 
 For having defaults for all values
 *   Eliminate boilerplate.
-
-For having one combined config file
-*   Since there would be defaults for all values, there will not be config boilerplate to be pulled from external sources. Many microfrontends will probably not need configuration files at all for most implementations. All configurations will have been written by the implementer, and therefore should be fairly short and comprehensible.
 
 For supporting hierarchical configuration
 *   Many organizations have multiple implementations with many similarities and a few differences. They should not be forced to manage config files for each of their implementations separately.
