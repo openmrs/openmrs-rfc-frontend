@@ -21,7 +21,7 @@ provide other tooling related to configuration.
 Microfrontend developers should use the official OpenMRS MF Config Library. 
 The Config Library should be a JavaScript module that
 *   Provides an API for modules to define a config schema
-*   Provides an API for modules access config values
+*   Provides an API for modules to access config values
 *   Looks for config files in an implementation’s esm-root-config (or using the Import Map)
 *   Validates config files in non-production environments
 *   Generates documentation for config schemas
