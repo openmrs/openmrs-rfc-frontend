@@ -1,6 +1,6 @@
 # Configuration
 - Start Date: 2019/09/09
-- RFC PR: 
+- RFC PR: https://github.com/openmrs/openmrs-rfc-frontend/pull/14
 
 ## Definitions
 
