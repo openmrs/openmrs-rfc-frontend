@@ -1,6 +1,6 @@
 ## Usability Testing
 - Start Date: 2019/09/10
-- RFC PR: 
+- RFC PR: https://github.com/openmrs/openmrs-rfc-frontend/pull/15
 	
 ## Definitions
 **Usability Studies / Usability Testing** involves watching users interact with a prototype or tool. This is a type of qualitative user testing.
