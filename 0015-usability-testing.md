@@ -46,7 +46,7 @@
 
 **Focus Groups** are distinctly different from user testing. Focus groups ask users what they may like to see or do. User testing involves watching users actually use something. Focus groups are not useful for the testing phase of UX work. They also have limited in the Discovery phase value https://medium.com/mule-design/focus-groups-are-worthless-7d30891e58f1
 
-**Accesibility Evaluation** is testing a design for accesibility across different user abilities. This is the subject for a different RFC.
+**Accessibility Evaluation** is testing a design for accessibility across different user abilities. This is the subject for a different RFC.
 
 ## Common practices (not enforced)
 	
