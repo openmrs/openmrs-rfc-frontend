@@ -23,16 +23,16 @@ For frontend projects within OpenMRS, the following guidelines apply:
 In this PR, contribution refers to people creating pull requests to Github repos. Other terms in the definition section have been linked to above.
 
 ## Reason for decision
-- Github contributing and contribution markdown files are the worldwide standard for open source software. They may link to a separate guide, but should be present.
+- Github contributing.md and pull_request_template.md markdown files are the worldwide standard for open source software. They may link to a separate guide, but should be present.
 - The OpenMRS code of conduct helps provide a safe environment for people within the OpenMRS community.
 - The OpenMRS MPL-2.0 + Health care disclaimer software license protects the freedom of the open source software while also protecting OpenMRS from lawsuits.
 - The OpenMRS pull request tips are a community maintained set of good practices.
 - Github squash and merge creates the most easily read and understood commit history on the master branch.
 - Enforcing that every PR links to a JIRA ticket discourages contribution by increasing barrier to entry. First, you have to create a JIRA account. Then you have to create an issue in the right project. Then you have to self assign it. Then you have to link to it. Then you have to close it. Linking to JIRA is appropriate and helpful when you are working on a ticket. However, not every code change is described by a JIRA ticket. See #19 for more details on the role of JIRA.
-- Enforcing that every PR has only one commit increases the barrier to entry while destroying git history. It makes it harder for the reviewer to see incremental progress in a PR. It is not required for the master branch to have a clean commit history due to Github's squash and merge feature.
+- Enforcing that every PR has only one commit increases the barrier to entry while destroying git history. It makes it harder for the reviewer to see incremental progress in a PR. Due to Github's squash and merge feature, it is not required for the master branch in order to have a clean commit history.
 
 ## Alternatives
-The OpenMRS community up until the authoring of this PR had already adopted much of what is in this PR. The new aspects of it are using Github squash and merge, not enforcing that all PRs are associated with a JIRA ticket, and allowing for multiple commits in a single PR.
+The OpenMRS community up already adopts much of what is in this PR. The new aspects of it are using Github squash and merge, not enforcing that all PRs are associated with a JIRA ticket, and allowing for multiple commits in a single PR. These new aspects only apply to frontend code.
 
 ## Common practices (not enforced)
 - Do not increase the scope of a PR after it has been reviewed.
@@ -43,3 +43,4 @@ The OpenMRS community up until the authoring of this PR had already adopted much
 - Avoid gatekeeping, which includes over-emphasizing to contributors how they're failing to follow the correct process.
 - Encourage code ownership. Review changes to the code you wrote. Do not overstep in a foreign codebase.
 - Provide detailed and helpful feedback to reviewers, including using [Github's suggestion feature](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/incorporating-feedback-in-your-pull-request) to help the contributor know how to make the needed changes.
+- Your first PR to a codebase should be small. Get a feel for what the reviewer expects before submitting a PR with a large amount of code in it.
