@@ -3,7 +3,7 @@
 - RFC PR: https://github.com/openmrs/openmrs-rfc-frontend/pull/20
 
 ## Decision, including impact on distributions
-For frontend projects within OpenMRS, the following software tools are used to instruct contributors on how to make a pull request.
+For frontend projects within OpenMRS, the following are used to instruct contributors on how to make a pull request.
 
 - [Github contributing.md files](https://help.github.com/en/github/building-a-strong-community/setting-guidelines-for-repository-contributors#adding-a-contributing-file)
 - [Github pull_request_template.md files](https://help.github.com/en/github/building-a-strong-community/creating-a-pull-request-template-for-your-repository)
