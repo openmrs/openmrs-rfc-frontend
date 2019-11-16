@@ -24,6 +24,8 @@ See the links above for definitions of Github Issues, OpenMRS JIRA, Github readm
 ## Alternatives
 Up until this RFC was proposed, the OpenMRS community did not use Github issues, readmes, or markdown in any capacity. This discourages collaboration from the open source community and is less accessible to those who are approaching OpenMRS for the first time. When Github issues are turned off, it gives the user of the software the impression that there is no one maintaining it and little hope of making it better. The communication gap between those who maintain the software and those who use the software is widened.
 
+The extremely popular open source project [Babel](https://babeljs.io/blog/) is an example of why using Github is the best way to go to encourage contribution. They tried to push people to a separate issue tracking system for a while but eventually came back to Github.
+
 ## Common practices (not enforced)
 - Add CI and other badges to your Github readmes
 - Add installation instructions (`npm install --save @openmrs/esm-login`) to your readme.
