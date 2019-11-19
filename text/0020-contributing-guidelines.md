@@ -41,6 +41,6 @@ The OpenMRS community up already adopts much of what is in this PR. The new aspe
 - Encourage as many contributors to engage in deep and meaningful contribution.
 - Be sensitive to the varying experience levels of OpenMRS contributors.
 - Avoid gatekeeping, which includes over-emphasizing to contributors how they're failing to follow the correct process.
-- Encourage code ownership. Review changes to the code you wrote. Do not overstep in a foreign codebase.
+- Encourage code ownership, including reviewing changes to the code and projects you've contributed to.
 - Provide detailed and helpful feedback to reviewers, including using [Github's suggestion feature](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/incorporating-feedback-in-your-pull-request) to help the contributor know how to make the needed changes.
 - Your first PR to a codebase should be small. Get a feel for what the reviewer expects before submitting a PR with a large amount of code in it.
