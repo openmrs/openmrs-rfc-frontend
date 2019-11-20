@@ -24,6 +24,8 @@ Config elements that will be shared between multiple modules should be added to 
 config tree. The values provided to this config tree would be made available to any module
 that requested them in its schema. Great discretion should be used in determining whether
 a config element should be added to `common`, to avoid it ballooning in size and complexity.
+The common configuration schema itself would live in `@openmrs/esm-module-config` and be
+maintained by the maintainer of that module.
 
 Modules should also be able to request config trees belonging to other modules. This mechanism
 should be used for config elements that need to be shared between modules but are not suitable for
