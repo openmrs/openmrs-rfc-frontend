@@ -53,7 +53,6 @@ Once the author and reviewers have commented and the discussion and proposal hav
 Approval must be given by three members of the "microfrontends squad" (as defined below) must indicate on the PR that they approve.
 
 Current members of the microfrontends squad:
-- @joeldenning (OpenMRS)
 - @Fatmali (Ampath)
 - @brandones (PIH)
 - @angshu (Bahmni)
