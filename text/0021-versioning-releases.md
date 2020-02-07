@@ -11,7 +11,7 @@ OpenMRS SPA: refers to an OpenMRS Micro-Frontend app. An example is openmrs-esm-
 
 CDN: Content Distribution Network such as jsdelivr. See https://www.jsdelivr.com/
 
-MAJOR Version: version when you make incompatible API changes
+MAJOR Version: version where there are incompatible API or configuration API changes, or major UI changes that are enabled by default
 
 MINOR Version: version when you add functionality in a backwards compatible manner
 
@@ -24,9 +24,8 @@ The releases should have a maintenance branch for bug fixes and patches so that 
 
 I propose that we have maintenance release branches for both Major and Minor releases, as the motivation for this is to allow implementors/distributions control on when to start using a certain feature, that could be in a certain minor or major release. 
 
-At this time, OpenMRS MF Squad will not maintain older released versions in terms of porting back features and bug fixes to those releases. An implementor/distribution who wishes to benefit from bug fixes, and is on an earlier major or minor release will have to back-port those bug fixes to the older release themselves. Such an individual will need write access to the Github repo hosting the SPA application of interest. 
-
-When to do a major or minor release will be request-driven. An implementor/distribution who may wish to benefit from features not yet released will need to request the Micro-Frontends Squad for a certain feature to be released, in a minor or major version as seen fit.  
+The OpenMRS Microfrontend Squad will not maintain release branches. Implementers or organizations who wish to maintain release branches may do so. They 
+should be granted write access to the GitHub repo hosting the ESM of interest.
 
 Releases should be tagged, and the artifacts distributed via a CDN maintained by OpenMRS Community, so that implementors have stable resources to choose from. 
 
@@ -42,4 +41,3 @@ Tagged releases should be distributed via NPM as well, to support development en
 Each implementor/distribution to have a fork of the OpenMRS SPAs that they are using, for the purposes of releasing ONLY. This is a less desirable approach as it encourage implementors/contributors/distributions to diverge, weakening the OpenMRS Community in the process. 
 
 ## Common practices (not enforced)
-- Consider adapting semantic versioning(SemVer), as SemVer allows implementors to more easily assess the work involved in upgrading an application. See https://semver.org/
