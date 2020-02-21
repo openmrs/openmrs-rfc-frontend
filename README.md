@@ -53,10 +53,13 @@ Once the author and reviewers have commented and the discussion and proposal hav
 Approval must be given by three members of the "microfrontends squad" (as defined below) must indicate on the PR that they approve.
 
 Current members of the microfrontends squad:
-- @Fatmali (Ampath)
-- @brandones (PIH)
-- @angshu (Bahmni)
+- @dkibet (Ampath)
+- @jonathandick (Ampath)
+- @nkimaina (Ampath)
 - @ojwanganto (Kenya EMR)
+- @brandones (PIH)
+- @dkayiwa (Uganda EMR)
+- @Fatmali
 
 Other groups who'd like to participate in the microfrontends squad can contact the squad on Talk.
 
