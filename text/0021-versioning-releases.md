@@ -22,7 +22,9 @@ OpenMRS SPA applications should have releases that are versioned so that each im
 
 The releases should have a maintenance branch for bug fixes and patches so that implementors running a particular version of an app can benefit from recent bug fixes. 
 
-I propose that we have maintenance release branches for both Major and Minor releases, as the motivation for this is to allow implementors/distributions control on when to start using a certain feature, that could be in a certain minor or major release. 
+I propose that we have maintenance release branches for both Major and Minor releases, as the motivation for this is to allow implementors/distributions control on when to start using a certain feature, that could be in a certain minor or major release.
+
+An implementor or distribution that requires a certain maintenance branch, either for a minor or major release is free to create it, by branching from the release-tagged commit.
 
 The OpenMRS Microfrontend Squad will not maintain release branches. Implementers or organizations who wish to maintain release branches may do so. They 
 should be granted write access to the GitHub repo hosting the ESM of interest.
