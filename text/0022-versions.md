@@ -3,8 +3,9 @@
 - RFC PR: https://github.com/openmrs/openmrs-rfc-frontend/pull/22
 
 ## Decision, including impact on distributions
-OpenMRS frontend ESMs should be versioned according to the following
-guidelines:
+OpenMRS frontend ESMs should be versioned according to
+[Semantic Versioning](https://semver.org/), with the following modification
+to the definition of a major version:
 
 A **Major** version is one in which **any** of the following have taken place
 - Backward-incompatible changes have been made to the API, if the ESM exposes an API
@@ -12,22 +13,24 @@ A **Major** version is one in which **any** of the following have taken place
   such that upgrading might cause a previously valid configuration to be invalid
 - A functional and substantive UI change has been introduced, which is by
   default different from the previous UI
+- A backend module dependency has been introduced or upgraded across a minor version
 
-A **Minor** version is one in which
-- A new feature has been introduced which does not meet the criteria above
+The key ideas here are that
 
-A **Patch** version is one in which
-- Bug fixes have been made in ways that are backward-compatible with respect to
-  the Configuration API and any other APIs.
+- The configuration schema is an API, which versioning should respect
+- Major UI changes are added as a condition for major versioning
+- ESM versions should be sensitive to backend module requirements
 
-This should be regarded as a clarification of how
-[Semantic Versioning](https://semver.org/) applies to OpenMRS ESMs. ESMs should
-be versioned according to SemVar, using the above guidelines about the meaning
-of major, minor, and patch versions.
+Apart from the differences made explicit in this RFC, SemVar should be followed.
 
 ## Definitions
 
 The decision, here, is the definitions.
+
+As a note, the
+[OpenMRS Versioning Conventions](https://wiki.openmrs.org/display/docs/Versioning)
+provide guidelines for versioning OpenMRS Modules. However, they do not
+usefully apply to ESMs.
 
 ## Reason for decision
 
@@ -38,13 +41,17 @@ is the most-used API. Due to these considerations, some extension of
 SemVar is warranted, in order to provide adequate guidance for versioning
 frontend ESMs.
 
+Additionally, implementers should expect to be able to upgrade ESMs across minor
+versions without having to worry about backend module dependencies changing.
+
 ## Alternatives
 
-- Version strictly according to the public APIs of ESMs. This would be more true
-  to the text of SemVar.
+- Version strictly according to the public APIs (and potentially the configuration schemas)
+    of ESMs, but not backend module dependencies or UI changes. This would be more true
+    to the text of SemVar.
 - Invent some other versioning rationale.
 - Abolish versions. Nothing but master and its irregular branches and forks. Has
-  the potential to make life solitary, poor, nasty, brutish, and short.
+    the potential to make life solitary, poor, nasty, brutish, and short.
 
 ## Common practices (not enforced)
 
