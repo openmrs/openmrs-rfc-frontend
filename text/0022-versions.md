@@ -11,8 +11,8 @@ A **Major** version is one in which **any** of the following have taken place
 - Backward-incompatible changes have been made to the API, if the ESM exposes an API
 - Backward-incompatible changes have been made to the Configuration API,
   such that upgrading might cause a previously valid configuration to be invalid
-- A functional and substantive UI change has been introduced, which is by
-  default different from the previous UI
+- A functional and substantive UI change has been introduced and that change is
+  present in the default configuration
 - A backend module dependency has been introduced or upgraded across a minor version
 
 The key ideas here are that
@@ -21,7 +21,7 @@ The key ideas here are that
 - Major UI changes are added as a condition for major versioning
 - ESM versions should be sensitive to backend module requirements
 
-Apart from the differences made explicit in this RFC, SemVar should be followed.
+Apart from the differences made explicit in this RFC, SemVer should be followed.
 
 ## Definitions
 
@@ -38,7 +38,7 @@ OpenMRS frontend ESMs do not, for the most part, center their APIs. Rather,
 they are built with a focus on UI features. For most of them, the
 [Configuration Schema](https://github.com/openmrs/openmrs-rfc-frontend/blob/master/text/0014-configuration.md)
 is the most-used API. Due to these considerations, some extension of
-SemVar is warranted, in order to provide adequate guidance for versioning
+SemVer is warranted, in order to provide adequate guidance for versioning
 frontend ESMs.
 
 Additionally, implementers should expect to be able to upgrade ESMs across minor
@@ -48,7 +48,7 @@ versions without having to worry about backend module dependencies changing.
 
 - Version strictly according to the public APIs (and potentially the configuration schemas)
     of ESMs, but not backend module dependencies or UI changes. This would be more true
-    to the text of SemVar.
+    to the text of SemVer.
 - Invent some other versioning rationale.
 - Abolish versions. Nothing but master and its irregular branches and forks. Has
     the potential to make life solitary, poor, nasty, brutish, and short.
@@ -56,5 +56,5 @@ versions without having to worry about backend module dependencies changing.
 ## Common practices (not enforced)
 
 - When introducing a major new feature or UI change that is toggled in configuration, consider
-  releasing first a minor version that has the feature disabled by default,
+  first releasing a minor version that has the feature disabled by default,
   and then enabling it by default in the next major version.
