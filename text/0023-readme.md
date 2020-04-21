@@ -8,7 +8,7 @@ configuration schema, and compatibility concerns in their README.
 
 The OpenMRS Wiki page
 [List of frontend modules](https://wiki.openmrs.org/pages/viewpage.action?pageId=224527568)
-will link directly to the README in the ESM's GitHub repo's page. The
+will link to the GitHub repository of the ESM. The
 OpenMRS Wiki will not have individual pages for each ESM.
 
 Documentation that is not specific to any particular ESM, such as
