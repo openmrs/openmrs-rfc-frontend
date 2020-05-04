@@ -13,9 +13,8 @@ There are two steps to implement a distribution of the activity functions:
 1. Have a proper root module in the microfrontend modules, which defines the
 activity function and lazy loads the rest of the microfrontend (via bundle
 splitting).
-2. Provide the ability the mark a microfrontend module as such - to allow the
-hosting application to dynamically define what microfrontend applications are
-available.
+2. Export special functionality that correctly identifies the module as a
+microfrontend that can be properly integrated.
 
 The process to migrate from a centralized module containing all activity
 functions to a distributed starts with a new `index.ts` in the microfrontends.
@@ -41,37 +40,23 @@ registerApplication(
 export { backendDependencies } from "./openmrs-backend-dependencies";
 ```
 
-For the reference application we should also update the `openmrs-module-spa` to
-dynamically generate the HTML with an entry
+Instead of lazy loading all modules from the importmaps the modules are
+directly evaluated. The modules exporting a `setupOpenMRS` are considered a
+microfrontend.
 
-```html
-<script>
-window.spaApps = [
-  // these are dynamically assembled
-  "@openmrs/esm-login",
-  "@openmrs/esm-home",
-  "@openmrs/esm-devtools",
-  "@openmrs/esm-primary-navigation",
-  "@openmrs/esm-patient-chart",
-];
-</script>
-```
+The interface for the `setupOpenMRS` function is described as:
 
-which is picked up by the `@openmrs/esm-root-config`, where the entries of
-`window.spaApps` are automatically loaded.
-
-In order to be picked up by `openmrs-module-spa` the microfrontend modules need
-to be declared as such. To do that the `package.json` will need to be modified.
-
-As an example the `@openmrs/esm-home` package will change to become:
-
-```json
-{
-  "name": "@openmrs/esm-home",
-  "openmrs-type": "microfrontend",
-  "...": "..."
+```ts
+interface SetupOpenMRS {
+  (): {
+	  lifecycle: LifeCycles<T> | (() => Promise<LifeCycles<T> | Splat<LifeCycles<T>>>);
+    activate(location: Location): boolean;
+  };
 }
 ```
+
+The evaluation of the exports of the modules from the importmaps can be done in
+the initial script of the app shell.
 
 ## Definition
 An **activation function** is a JavaScript function that is used by the Single
@@ -86,6 +71,13 @@ presented website.
 
 The **DOM** refers to the API responsible for the object representation of a
 website in the browser.
+
+An **app shell** refers to the index.html page that includes the required base
+scripts. Thus triggering the whole loading process necessary for all the
+microfrontends.
+
+The **initial script** is the script performing the loading of the Single SPA
+library. It sets up important globals and imports the important global modules.
 
 ## Reason for decision
 - Make it possible to create self-containing microfrontends
