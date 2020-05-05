@@ -3,60 +3,26 @@
 - RFC PR: https://github.com/openmrs/openmrs-rfc-frontend/pull/26
 
 ## Decision, including impact on distributions
-For being able to properly distribute the microfrontends the activity function
-has to be distributed, too. Consequently, each microfrontend will be even more
-autonomous and easier to develop. Lastly, it will also be very easy to create a
-distribution using the microfrontend modules.
+OpenMRS Microfrontends will have their own default activator functions.
+Microfrontends will be identified as such by their exports satisfying a
+specific microfrontend interface, defined in this RFC. The app shell will load
+the app shell config if available. The app shell will register all
+microfrontends in the import map with Single SPA, and start the application.
 
-There are two steps to implement a distribution of the activity functions:
+The existing concept of a "root config" will be superseded by the app shell
+and an app shell config.
 
-1. Have a proper root module in the microfrontend modules, which defines the
-activity function and lazy loads the rest of the microfrontend (via bundle
-splitting).
-2. Export special functionality that correctly identifies the module as a
-microfrontend that can be properly integrated.
+In order to implement this change, we will need to
 
-The process to migrate from a centralized module containing all activity
-functions to a distributed starts with a new `index.ts` in the microfrontends.
-
-The `index.ts` may be as simple as follows:
-
-```js
-// set the public path to be able to retrieve side bundles
-import "./set-public-path";
-// register the application in the shared single-spa package
-import { registerApplication } from "single-spa";
-// get useful helpers for the activity functions from the loaded root-config
-import { routePrefix } from '@openmrs/esm-root-config';
-
-// perform the registration with the lazy loading of the lifecycle and its activity function
-registerApplication(
-  "@openmrs/esm-home",
-  () => import('./openmrs-esm-home'),
-  location => routePrefix("home", location),
-);
-
-// export other dependencies to be used, e.g., by the dev tooling
-export { backendDependencies } from "./openmrs-backend-dependencies";
-```
+1. Add index.ts entrypoint files to each microfrontend that satisfy the
+microfrontend interface (exporting lifecycle and activate).
+2. Change the initial script to behave as described.
+3. Migrate all existing root configs to the new structure. This will generally
+just mean removing the calls to registerApplication and exporting those
+activators that are different from the defaults.
 
 Instead of lazy loading all modules from the importmaps the modules are
-directly evaluated. The modules exporting a `setupOpenMRS` are considered a
-microfrontend.
-
-The interface for the `setupOpenMRS` function is described as:
-
-```ts
-interface SetupOpenMRS {
-  (): {
-	  lifecycle: LifeCycles<T> | (() => Promise<LifeCycles<T> | Splat<LifeCycles<T>>>);
-    activate(location: Location): boolean;
-  };
-}
-```
-
-The evaluation of the exports of the modules from the importmaps can be done in
-the initial script of the app shell.
+directly evaluated. 
 
 ## Definition
 An **activation function** is a JavaScript function that is used by the Single
@@ -79,11 +45,61 @@ microfrontends.
 The **initial script** is the script performing the loading of the Single SPA
 library. It sets up important globals and imports the important global modules.
 
+The new **root config** replaces the old concept of a [root config][1]. An
+optional element of the import map, named `@openmrs/esm-root-config`, which can
+be used to (1) provide module configs to `@openmrs/esm-module-config`, (2)
+override module activator functions, and (3) do any other pre-app-launch setup
+wanted by the actual implemention. Removed responsibility: Registration of
+microfrontends with the Single SPA framework.
+
+A **microfrontend interface** describes the conditions on the exports of an ESM
+which, if met, indicate that the module is an OpenMRS microfrontend module. In
+particular, the modules exporting a `setupOpenMRS` are considered a
+microfrontend module.
+
+The interface for the `setupOpenMRS` function can be described in TypeScript as
+
+```ts
+interface SetupOpenMRS {
+  (): {
+	  lifecycle: LifeCycles<T> | (() => Promise<LifeCycles<T> | Splat<LifeCycles<T>>>);
+    activate(location: Location): boolean;
+  };
+}
+```
+
+The evaluation of the exports of the modules from the importmaps can be done in
+the initial script of the app shell.
+
+The process to migrate from a centralized module containing all activity
+functions to a distributed introduces a new `index.ts` in the microfrontends.
+
+The `index.ts` may be as simple as follows:
+
+```js
+// set the public path to be able to retrieve side bundles
+import "./set-public-path";
+// get useful helpers for the activity functions from the loaded root-config
+import { routePrefix } from '@openmrs/esm-root-config';
+
+export function setupOpenMRS() {
+  return {
+    lifecycle: () => import('./openmrs-esm-home'),
+    activate: location => routePrefix("home", location),
+  };
+}
+
+// export other dependencies to be used, e.g., by the dev tooling
+export { backendDependencies } from "./openmrs-backend-dependencies";
+```
+
 ## Reason for decision
+- Enhance possibility of distributing the microfrontends
 - Make it possible to create self-containing microfrontends
-- Allow an easy distribution model
+- Allow an easy packaging model for OpenMRS distributions
 - Use existing standards instead of creating new ones
 - Cooperate with existing architecture
+- Improve developer experience
 
 ## Alternatives
 There are three main alternatives that can be seen:
@@ -100,3 +116,5 @@ detection may need to be defined upfront.
 ## Common practices (not enforced)
 - Dependency on `@openmrs/esm-root-config` for helper functions
 - Predefined helpers to simplify existing tasks
+
+[1]: https://wiki.openmrs.org/display/projects/openmrs-esm-root-config
