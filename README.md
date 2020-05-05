@@ -52,16 +52,9 @@ If a pull request becomes stale (not updated or talked about after a fewish week
 Once the author and reviewers have commented and the discussion and proposal have stabilized, the proposal will be merged or closed.
 Approval must be given by three members of the "microfrontends squad" (as defined below) must indicate on the PR that they approve.
 
-Current members of the microfrontends squad:
-- @dkibet (Ampath)
-- @jonathandick (Ampath)
-- @nkimaina (Ampath)
-- @ojwanganto (Kenya EMR)
-- @brandones (PIH)
-- @dkayiwa (Uganda EMR)
-- @Fatmali
+Current members of the microfrontends squad are [listed on the GitHub members page](https://github.com/orgs/openmrs/teams/microfrontends-squad/members). More infos are also available [in the OpenMRS wiki](https://wiki.openmrs.org/display/projects/Frontend+-+SPA+and+Microfrontends).
 
-Other groups who'd like to participate in the microfrontends squad can contact the squad on Talk.
+Other groups who'd like to participate in the microfrontends squad can contact the squad on the [Slack channel #microfrontend](https://slack.openmrs.org/).
 
 ### Step 4 - Implementation
 Once a proposal is merged, it is now part of the RFC. This means that we intend to implement what is described in the RFC. The changes or additions to
