@@ -51,12 +51,9 @@ override module activator functions, and (3) do any other pre-app-launch setup
 wanted by the actual implemention. It does not register
 microfrontends with the Single SPA framework.
 
-A **microfrontend interface** describes the conditions on the exports of an ESM
-which, if met, indicate that the module is an OpenMRS microfrontend module. In
-particular, the modules exporting a `setupOpenMRS` are considered a
-microfrontend module.
-
-The interface for the `setupOpenMRS` function can be described in TypeScript as
+The **microfrontend interface** is the interface that the *initial script* expects microfrontends
+to satisfy. Microfrontends are ESMs whose names are suffixed with `-app`. The interface
+consists of a single function, `setupOpenMRS`:
 
 ```ts
 interface SetupOpenMRS {
