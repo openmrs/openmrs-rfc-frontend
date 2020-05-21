@@ -11,8 +11,8 @@ dynamically split from the main application bundle via a dynamic import in the l
 The app shell will load the app shell config if available. The app shell will register all
 microfrontends in the import map with Single SPA, and start the application.
 
-The existing concept of a "root config" will be superseded by the app shell
-and an app shell config.
+The existing concept of a "root config" will be superseded by the initial script,
+which is optionally configurable by a new kind of "root config."
 
 In order to implement this change, we will need to
 
