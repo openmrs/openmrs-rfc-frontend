@@ -48,7 +48,7 @@ The new **root config** replaces the old concept of a [root config][1]. An
 optional element of the import map, named `root-config`, which can
 be used to (1) provide module configs to `@openmrs/esm-module-config`, (2)
 override module activator functions, and (3) do any other pre-app-launch setup
-wanted by the actual implemention. Removed responsibility: Registration of
+wanted by the actual implemention. It does not register
 microfrontends with the Single SPA framework.
 
 A **microfrontend interface** describes the conditions on the exports of an ESM
