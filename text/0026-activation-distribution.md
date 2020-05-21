@@ -23,9 +23,6 @@ microfrontend interface (exporting lifecycle and activate).
 just mean removing the calls to registerApplication and exporting those
 activators that are different from the defaults.
 
-Instead of lazy loading all modules from the importmaps the modules are
-directly evaluated. 
-
 ## Definition
 An **activation function** is a JavaScript function that is used by the Single
 SPA library to determine if and when a microfrontend should be activated.
