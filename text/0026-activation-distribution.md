@@ -4,9 +4,11 @@
 
 ## Decision, including impact on distributions
 OpenMRS Microfrontends will have their own default activator functions.
-Microfrontends will be identified as such by their exports satisfying a
-specific microfrontend interface, defined in this RFC. The app shell will load
-the app shell config if available. The app shell will register all
+Microfrontends will be identified as such by their names being suffixed with `-app`.
+Microfrontends' will provide activator and lifecycle functions in their exports according
+to a specific microfrontend interface, defined in  this RFC. The interface bundle will be
+dynamically split from the main application bundle via a dynamic import in the lifecycle function.
+The app shell will load the app shell config if available. The app shell will register all
 microfrontends in the import map with Single SPA, and start the application.
 
 The existing concept of a "root config" will be superseded by the app shell
