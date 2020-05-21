@@ -40,8 +40,9 @@ website in the browser.
 An **app shell** refers to the index.html page that includes required libraries
 and the *initial script*.
 
-The **initial script** is the script performing the loading of the Single SPA
-library. It sets up important globals and imports the important global modules.
+The **initial script** is the script which identifies microfrontends in the import map,
+loads them, loads the *root config*, and registers microfrontends with the Single SPA
+application. It sets up important globals and imports the important global modules.
 
 The new **root config** replaces the old concept of a [root config][1]. An
 optional element of the import map, named `root-config`, which can
