@@ -37,9 +37,8 @@ presented website.
 The **DOM** refers to the API responsible for the object representation of a
 website in the browser.
 
-An **app shell** refers to the index.html page that includes the required base
-scripts. Thus triggering the whole loading process necessary for all the
-microfrontends.
+An **app shell** refers to the index.html page that includes required libraries
+and the *initial script*.
 
 The **initial script** is the script performing the loading of the Single SPA
 library. It sets up important globals and imports the important global modules.
