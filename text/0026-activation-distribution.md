@@ -45,7 +45,7 @@ The **initial script** is the script performing the loading of the Single SPA
 library. It sets up important globals and imports the important global modules.
 
 The new **root config** replaces the old concept of a [root config][1]. An
-optional element of the import map, named `@openmrs/esm-root-config`, which can
+optional element of the import map, named `root-config`, which can
 be used to (1) provide module configs to `@openmrs/esm-module-config`, (2)
 override module activator functions, and (3) do any other pre-app-launch setup
 wanted by the actual implemention. Removed responsibility: Registration of
