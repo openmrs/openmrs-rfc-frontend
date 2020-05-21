@@ -58,7 +58,7 @@ consists of a single function, `setupOpenMRS`:
 ```ts
 interface SetupOpenMRS {
   (): {
-	  lifecycle: LifeCycles<T> | (() => Promise<LifeCycles<T> | Splat<LifeCycles<T>>>);
+    lifecycle: LifeCycles<T> | (() => Promise<LifeCycles<T> | Splat<LifeCycles<T>>>);
     activate(location: Location): boolean;
   };
 }
