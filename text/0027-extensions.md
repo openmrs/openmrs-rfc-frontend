@@ -36,7 +36,17 @@ Extensions and Extension Points are coordinated via the **Extension Manager**.
 
 The **lifecycle methods** are functions called `bootstrap`, `mount`, `unmount`, and
 optionally `update`.
-See the [Single-SPA docs](https://single-spa.js.org/docs/parcels-overview/).
+See the [Single-SPA docs](https://single-spa.js.org/docs/parcels-overview/). In Typescript
+terms we will say
+
+```javascript
+interface Lifecycle {
+  bootstrap: () => void,
+  mount: () => void,
+  unmount: () => void,
+  update?: () => void
+}
+```
 
 Please see
 [slides 17-end of this presentation](https://docs.google.com/presentation/d/1ParNFdehbBexycC_XzdvpPNXBCea-4GYwAuoPFtvYIY/edit#slide=id.g921ee92cfb_0_2),
@@ -44,11 +54,11 @@ where many of the below concepts are introduced visually.
 
 ## API Proposal
 
-Extensions are registered in the setupOpenMRS function of a module. The `extensions`
+Extensions are registered in the `setupOpenMRS` function of a module. The `extensions`
 key should accept an array of objects with the following properties:
 - name: the unique name of the extension
 - type: the autocomplete type of the extension
-- load: a function that, when called, imports the extension
+- load: a function that, when called, returns an object with the lifecycle methods
 
 ```javascript
 function setupOpenMRS() {
@@ -63,8 +73,6 @@ function setupOpenMRS() {
   };
 }
 ```
-
-An Extension is an object with lifecycle methods.
 
 Extension Points can be registered in React using the component `ExtensionPoint`
 (and its optional child, `Extension`)
@@ -98,7 +106,7 @@ Where `renderFunction` must both accept and return an object with the lifecycle 
 
 Extensions can be associated with extension points programmatically by calling `attach`
 
-```
+```javascript
 attach(extensionPointName: string, extensionName: string, [extensionId: string]): void
 ```
 
