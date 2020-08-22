@@ -39,7 +39,7 @@ optionally `update`.
 See the [Single-SPA docs](https://single-spa.js.org/docs/parcels-overview/). In Typescript
 terms we will say
 
-```javascript
+```jsx
 interface Lifecycle {
   bootstrap: () => void,
   mount: () => void,
@@ -66,9 +66,9 @@ function setupOpenMRS() {
     lifecycle: () => import("./openmrs-esm-login"),
     activate: "login",
     extensions: [
-        { name: “locationPicker”,
-          type: “setting”,
-          load: () => import(“./location-picker”) }
+        { name: "locationPicker",
+          type: "setting",
+          load: () => import("./location-picker") }
     ]
   };
 }
@@ -77,7 +77,7 @@ function setupOpenMRS() {
 Extension Points can be registered in React using the component `ExtensionPoint`
 (and its optional child, `Extension`)
 
-```javascript
+```jsx
 <ExtensionPoint name="navbarSettings" type="setting" />
 
 // or to add custom render logic
@@ -121,7 +121,7 @@ Tangentially to all this, `esm-implementer-tools` exports a new React component
 which renders only when the UI Editor is on, and which, when clicked, sends
 the user to the specified config path in the Configuration tab of the dev tools.
 
-```javascript
+```jsx
 <ConfigEditButton configPath="logo.src" />
 ```
 
@@ -228,15 +228,15 @@ children once for each extension that will be attached. It should provide one
 
 The following two are equivalent:
 
-```javascript
+```jsx
 <ExtensionPoint name="foo" type="bar" />
 ```
 
 and
 
-```javascript
+```jsx
 <ExtensionPoint name="foo" type="bar">
-  <Extension>
+  <Extension />
 </ExtensionPoint>
 ```
 
