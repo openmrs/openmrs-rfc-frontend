@@ -86,7 +86,7 @@ Extension Points can be registered in React using the component `ExtensionPoint`
   <div className="setting-box">
     <Extension />
   </div>
-}/>
+</ExtensionPoint>
 ```
 
 These wrap two framework-agnostic functions,
@@ -304,4 +304,3 @@ The existing function should be modified to *exclude* the special `extensions` k
 The existing module-config-internal function should be modified to complain if a
 developer attempts to provide a schema with `extensions` as a top-level key. The
 `extensions` key is special and implicit.
-
