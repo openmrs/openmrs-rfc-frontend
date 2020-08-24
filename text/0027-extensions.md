@@ -21,18 +21,18 @@ and managed through the UI.
 
 An **Extension** is a component with a unique *name* and a *type*.
 
-An **Extension Point** is a place in the DOM where extensions can be attached.
+An **Extension Slot** is a place in the DOM where extensions can be attached.
 It has a unique *name* and a *type*.
 
-The **names** of extensions and extension points should be different.
-Extensions can be attached to extension points by referring to each of their
+The **names** of extensions and extension slots should be different.
+Extensions can be attached to extension slots by referring to each of their
 names. This can be done in code or in configuration.
 
-Extensions and extension points refer to the same small set of **types**.
+Extensions and extension slots refer to the same small set of **types**.
 These types are merely suggestions. They are used by the extension autocomplete UI
 to suggest extensions that are likely to make sense in that context.
 
-Extensions and Extension Points are coordinated via the **Extension Manager**.
+Extensions and Extension Slots are coordinated via the **Extension Manager**.
 
 The **lifecycle methods** are functions called `bootstrap`, `mount`, `unmount`, and
 optionally `update`.
@@ -74,15 +74,15 @@ function setupOpenMRS() {
 }
 ```
 
-Extension Points can be registered in React using the component `ExtensionPoint`
+Extension Slots can be registered in React using the component `ExtensionSlot`
 (and its optional child, `Extension`)
 
 ```jsx
-<ExtensionPoint name="navbarSettings" type="setting" />
+<ExtensionSlot name="navbarSettings" type="setting" />
 
 // or to add custom render logic
 
-<ExtensionPoint name="navbarSettings" type="setting" />
+<ExtensionSlot name="navbarSettings" type="setting" />
   <div className="setting-box">
     <Extension />
   </div>
@@ -92,11 +92,11 @@ Extension Points can be registered in React using the component `ExtensionPoint`
 These wrap two framework-agnostic functions,
 
 ```javascript
-getExtensionNamesForExtensionPoint(extensionPointName: string): string[]
+getExtensionNamesForExtensionSlot(extensionSlotName: string): string[]
 // and
 renderExtension(
     bindSite: HTMLElement,
-    extensionPointName: string,
+    extensionSlotName: string,
     extensionName: string,
     renderFunction: (Lifecycle) => Lifecycle
 ): void
@@ -104,17 +104,17 @@ renderExtension(
 
 Where `renderFunction` must both accept and return an object with the lifecycle methods.
 
-Extensions can be associated with extension points programmatically by calling `attach`
+Extensions can be associated with extension slots programmatically by calling `attach`
 
 ```javascript
-attach(extensionPointName: string, extensionName: string, [extensionId: string]): void
+attach(extensionSlotName: string, extensionName: string, [extensionId: string]): void
 ```
 
-This can take place either on the extension point side, or on the exension side
+This can take place either on the extension slot side, or on the exension side
 where `setupOpenMRS` is defined.
 
 `extensionId` is optional. It should be used when an extension is being attached
-to the same extension point multiple times, to give it an intuitive unique name.
+to the same extension slot multiple times, to give it an intuitive unique name.
 
 Tangentially to all this, `esm-implementer-tools` exports a new React component
 `<ConfigEditButton configPath />`,
@@ -129,13 +129,13 @@ This uses a framework-agnostic function `goToEditConfig(configPath)`.
 
 ### Configuration
 
-Every module that has extension points implicitly supports configuration of the form
+Every module that has extension slots implicitly supports configuration of the form
 
 ```js
 {
   "my-module-name": {
     "extensions": {
-      `extensionPointName`: {
+      `extensionSlotName`: {
         "add": [
           {
             "extension": // string, the extension name
@@ -154,11 +154,11 @@ Every module that has extension points implicitly supports configuration of the 
 }
 ```
 
-So the four keys for each extension point are `add`, `disable`, `order`, and `configure`.
+So the four keys for each extension slot are `add`, `disable`, `order`, and `configure`.
 All are optional. The extension system does not require configuration to work.
 
 `add[i].id` is optional and defaults to `extensionName`. Used if needed to
-differentiate multiple instances of this extension on this extension point.
+differentiate multiple instances of this extension on this extension slot.
 
 `add[i].config` and `configure[extensionId]` both take objects that should 
 satisfy the config schema that the extension's module
@@ -167,7 +167,7 @@ defines. All extensions will receive a parameter `config`, which is prepared by
 "Implementation Notes."
 
 `disable` causes and extension which was programmatically `attach`ed to an
-extension point not to appear.
+extension slot not to appear.
 
 `order` changes the order in which extensions appear. The default is the order in
 which they were `attach`ed, with `add`ed extensions at the end.
@@ -189,15 +189,15 @@ The precedence of configuration sources will be (lowest first):
 The implementer tools should be based on the devtools UI Configuration tab. It
 should have a toggle called "UI Editor". When turned on, the user should see:
 - A little red X in the bottom-right corner of each extension, which adds its ID
-  to the "disable" array in the config for that extension point.
-- A little green + in the bottom-right corner of each extension point, which
-  opens a new object in the "add" array in the config for that extension point.
+  to the "disable" array in the config for that extension slot.
+- A little green + in the bottom-right corner of each extension slot, which
+  opens a new object in the "add" array in the config for that extension slot.
 - A little blue pencil icon wherever there is a `ConfigEditButton`.
 - A thick grey border at the bottom of each extension which allows the user to drag
-  and drop the extension within the extension point, which causes the "order"
-  array in the config for that extension point to update.
+  and drop the extension within the extension slot, which causes the "order"
+  array in the config for that extension slot to update.
 - A tooltip (or similar) indicating the extension ID when hovering an extension
-- A tooltip (or similar) indicating the extension point name when hovering an extension point
+- A tooltip (or similar) indicating the extension slot name when hovering an extension slot
 
 The configuration shown in the Configuration tab, which at present is just
 JSON, should be interactive. Specifically, clicking any value should open
@@ -217,30 +217,30 @@ Next to the "UI Editor" button there should be a "Save to server" button, a
 The extension manager doesn't necessarily have to have its own module, but
 it ought to.
 
-The `<ExtensionPoint />` component
+The `<ExtensionSlot />` component
 [should be a](https://reactjs.org/docs/render-props.html#be-careful-when-using-render-props-with-reactpurecomponent)
 `React.Component`. As in the 
 [current implementation](https://github.com/openmrs/openmrs-esm-api/blob/master/src/shared-api-objects/extension-slot-react.component.tsx#L22),
 it should simply call `renderOpenmrsExtension`. However, it should render its
 children once for each extension that will be attached. It should provide one
 `ref` for each extension to attach to, and that ref should be located at the
-`Extension` child of `ExtensionPoint`.
+`Extension` child of `ExtensionSlot`.
 
 The following two are equivalent:
 
 ```jsx
-<ExtensionPoint name="foo" type="bar" />
+<ExtensionSlot name="foo" type="bar" />
 ```
 
 and
 
 ```jsx
-<ExtensionPoint name="foo" type="bar">
+<ExtensionSlot name="foo" type="bar">
   <Extension />
-</ExtensionPoint>
+</ExtensionSlot>
 ```
 
-When "UI Editor" is enabled, the extension point should render the `+` and `X` buttons
+When "UI Editor" is enabled, the extension slot should render the `+` and `X` buttons
 for adding and removing extensions, as well as the tooltips.
 
 The API should also include a function `getExtensionNamesForType(type: string): string[]`, which
@@ -255,14 +255,14 @@ means *used only in the initial script, the extension manager, the devtools, or 
 
 #### getExtensionConfig
 
-`getExtensionConfig(extensionPointName, extensionId)` should return the configuration
+`getExtensionConfig(extensionSlotName, extensionId)` should return the configuration
 that is expected by the extension according to the config schema defined in its
 module. Its values take the following precedence (lowest first):
 
 - values under the extension-defining module's top-level key
-- values under the extension point -defining module's top-level key, via
-    `extensions[extensionPointName].add[i].config`
-    or `extensions[extensionPointName].configure[extensionId]`
+- values under the extension slot -defining module's top-level key, via
+    `extensions[extensionSlotName].add[i].config`
+    or `extensions[extensionSlotName].configure[extensionId]`
 
 `getExtensionConfig` should be used exclusively by the extension manager, in order to
 populate `params` in the
@@ -272,12 +272,12 @@ populate `params` in the
 mountRootParcel(extension, { domElement, ...params });
 ```
 
-#### getExtensionPointConfig
+#### getExtensionSlotConfig
 
-`getExtensionPointConfig(extensionPointName)` should return the configuration at
-`[moduleName].extensions.[extensionPointName]`. It should be used exclusively by
+`getExtensionSlotConfig(extensionSlotName)` should return the configuration at
+`[moduleName].extensions.[extensionSlotName]`. It should be used exclusively by
 the extension manager to make decisions about how extensions should be rendered
-into extension points.
+into extension slots.
 
 #### getTemporaryConfig
 
