@@ -292,6 +292,11 @@ Returns whatever is in the LocalStorage temporary config.
 `setTemporaryConfigValue(path, value)` should update the value in LocalStorage.
 Ideally it should cause the relevant component to re-render.
 
+
+#### unsetTemporaryConfigValue
+
+`unsetTemporaryConfigValue(path)`, the counterpart to `setTemporaryConfigValue`.
+
 #### clearTemporaryConfig
 
 Used by the Implementer Tools "Reset" button.
