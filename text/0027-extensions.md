@@ -287,8 +287,12 @@ in the devtools.
 
 #### setTemporaryConfigValue
 
-`setDevtoolsConfigValue(path, value)` should update the value in LocalStorage.
+`setTemporaryConfigValue(path, value)` should update the value in LocalStorage.
 Ideally it should cause the relevant component to re-render.
+
+#### clearTemporaryConfig
+
+Used by the Implementer Tools "Reset" button.
 
 #### saveConfigFile
 
