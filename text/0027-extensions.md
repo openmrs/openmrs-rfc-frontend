@@ -279,11 +279,13 @@ mountRootParcel(extension, { domElement, ...params });
 the extension manager to make decisions about how extensions should be rendered
 into extension slots.
 
+#### getImplementerToolsConfig
+
+Change from `getDevtoolsConfig`.
+
 #### getTemporaryConfig
 
-Change from `getDevtoolsConfig`. It will need to return not just the existing
-config tree, but also schema information, in order to allow editing to take place
-in the devtools.
+Returns whatever is in the LocalStorage temporary config.
 
 #### setTemporaryConfigValue
 
