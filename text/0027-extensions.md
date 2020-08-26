@@ -86,7 +86,7 @@ Extension Slots can be registered in React using the component `ExtensionSlot`
   <div className="setting-box">
     <Extension />
   </div>
-</ExtensionPoint>
+</ExtensionSlot>
 ```
 
 These wrap two framework-agnostic functions,
