@@ -6,8 +6,8 @@
 
 We'll use an extension system that supports
 1. discovery—that components know where to "plug themselves in" to the UI
-2. configurability—that implementers can change which components are plugged in where
-    using config files
+2. configurability—that implementers can use config files to change which
+    components are plugged in where
 
 We'll build an UI in a new module `@openmrs/esm-implementer-tools`
 for managing that configuration, which will assist implementers
