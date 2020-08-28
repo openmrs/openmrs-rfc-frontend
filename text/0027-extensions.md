@@ -11,7 +11,7 @@ We'll use an extension system that supports
 
 We'll build an UI in a new module `@openmrs/esm-implementer-tools`
 for managing that configuration, which will assist implementers
-in changing the config to add, disable, or reorder extensions.
+in changing the config to add, remove, or reorder extensions.
 
 All servers will have a config file `config.json` in the `frontends` directory
 of the application data directory. This file can be written to by the server,
@@ -27,6 +27,10 @@ It has a unique *name* and a *type*.
 The **names** of extensions and extension slots should be different.
 Extensions can be attached to extension slots by referring to each of their
 names. This can be done in code or in configuration.
+
+An **extension ID** uniquely identifies an extension *within a specific extension slot*.
+By default, if an extension is only attached to an extension point once,
+the extension ID is the extension name.
 
 Extensions and extension slots refer to the same small set of **types**.
 These types are merely suggestions. They are used by the extension autocomplete UI
@@ -49,7 +53,7 @@ interface Lifecycle {
 ```
 
 Please see
-[slides 17-end of this presentation](https://docs.google.com/presentation/d/1ParNFdehbBexycC_XzdvpPNXBCea-4GYwAuoPFtvYIY/edit#slide=id.g921ee92cfb_0_2),
+[slides 7-end of this presentation](https://docs.google.com/presentation/d/1ParNFdehbBexycC_XzdvpPNXBCea-4GYwAuoPFtvYIY/edit#slide=id.g921ee92cfb_0_2),
 where many of the below concepts are introduced visually.
 
 ## API Proposal
@@ -82,7 +86,7 @@ Extension Slots can be registered in React using the component `ExtensionSlot`
 
 // or to add custom render logic
 
-<ExtensionSlot name="navbarSettings" type="setting" />
+<ExtensionSlot name="navbarSettings" type="setting">
   <div className="setting-box">
     <Extension />
   </div>
@@ -98,8 +102,8 @@ renderExtension(
     bindSite: HTMLElement,
     extensionSlotName: string,
     extensionName: string,
-    renderFunction: (Lifecycle) => Lifecycle
-): void
+    renderFunction: (lifecycle: Lifecycle) => Lifecycle
+): CancelLoading
 ```
 
 Where `renderFunction` must both accept and return an object with the lifecycle methods.
@@ -107,14 +111,17 @@ Where `renderFunction` must both accept and return an object with the lifecycle 
 Extensions can be associated with extension slots programmatically by calling `attach`
 
 ```javascript
-attach(extensionSlotName: string, extensionName: string, [extensionId: string]): void
+attach(extensionSlotName: string, extensionName: string): void
 ```
 
 This can take place either on the extension slot side, or on the exension side
 where `setupOpenMRS` is defined.
 
-`extensionId` is optional. It should be used when an extension is being attached
-to the same extension slot multiple times, to give it an intuitive unique name.
+If the same extension is attached to the same extension slot multiple times,
+the `extensionName` must be made unique by suffixing it with `#[extensionId]`,
+where `[extensionId]` is an identifier of the developer's choosing—preferably
+one that is descriptive and human-friendly. So
+`notesWidget#hivNotes` would be a valid value for `extensionName`.
 
 Tangentially to all this, `esm-implementer-tools` exports a new React component
 `<ConfigEditButton configPath />`,
@@ -138,12 +145,11 @@ Every module that has extension slots implicitly supports configuration of the f
       `extensionSlotName`: {
         "add": [
           {
-            "extension": // string, the extension name
-            "id": // optional string
+            "extension": // string, the extension name,  with optional '#id' suffix
             "config": // optional object
           }
         ],
-        "disable": // Array<string>, array of extension IDs
+        "remove": // Array<string>, array of extension IDs
         "order": // Array<string>, array of extension IDs
         "configure": {
           `extensionId`: // object
@@ -154,11 +160,8 @@ Every module that has extension slots implicitly supports configuration of the f
 }
 ```
 
-So the four keys for each extension slot are `add`, `disable`, `order`, and `configure`.
+So the four keys for each extension slot are `add`, `remove`, `order`, and `configure`.
 All are optional. The extension system does not require configuration to work.
-
-`add[i].id` is optional and defaults to `extensionName`. Used if needed to
-differentiate multiple instances of this extension on this extension slot.
 
 `add[i].config` and `configure[extensionId]` both take objects that should 
 satisfy the config schema that the extension's module
@@ -166,7 +169,7 @@ defines. All extensions will receive a parameter `config`, which is prepared by
 `esm-module-config` through a new internal function, `getExtensionConfig`. See
 "Implementation Notes."
 
-`disable` causes and extension which was programmatically `attach`ed to an
+`remove` causes and extension which was programmatically `attach`ed to an
 extension slot not to appear.
 
 `order` changes the order in which extensions appear. The default is the order in
@@ -189,7 +192,7 @@ The precedence of configuration sources will be (lowest first):
 The implementer tools should be based on the devtools UI Configuration tab. It
 should have a toggle called "UI Editor". When turned on, the user should see:
 - A little red X in the bottom-right corner of each extension, which adds its ID
-  to the "disable" array in the config for that extension slot.
+  to the "remove" array in the config for that extension slot.
 - A little green + in the bottom-right corner of each extension slot, which
   opens a new object in the "add" array in the config for that extension slot.
 - A little blue pencil icon wherever there is a `ConfigEditButton`.
