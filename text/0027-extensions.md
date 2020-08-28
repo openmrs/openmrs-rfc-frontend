@@ -28,7 +28,7 @@ The **names** of extensions and extension slots should be different.
 Extensions can be attached to extension slots by referring to each of their
 names. This can be done in code or in configuration.
 
-An **extension ID** uniquely identifies an extension *within a specific extension slot*.
+An **Extension ID** uniquely identifies an extension *within a specific extension slot*.
 By default, if an extension is only attached to an extension point once,
 the extension ID is the extension name.
 
@@ -53,7 +53,7 @@ interface Lifecycle {
 ```
 
 Please see
-[slides 7-end of this presentation](https://docs.google.com/presentation/d/1ParNFdehbBexycC_XzdvpPNXBCea-4GYwAuoPFtvYIY/edit#slide=id.g921ee92cfb_0_2),
+[slides 17-end of this presentation](https://docs.google.com/presentation/d/1ParNFdehbBexycC_XzdvpPNXBCea-4GYwAuoPFtvYIY/edit#slide=id.g921ee92cfb_0_2),
 where many of the below concepts are introduced visually.
 
 ## API Proposal
