@@ -223,7 +223,7 @@ it ought to.
 The `<ExtensionSlot />` component
 [should be a](https://reactjs.org/docs/render-props.html#be-careful-when-using-render-props-with-reactpurecomponent)
 `React.Component`. As in the 
-[current implementation](https://github.com/openmrs/openmrs-esm-api/blob/master/src/shared-api-objects/extension-slot-react.component.tsx#L22),
+[current implementation](https://github.com/openmrs/openmrs-esm-api/blob/4132f1b25b2044c86fe9fe7ea3c876c9abe214fe/src/shared-api-objects/extension-slot-react.component.tsx#L22),
 it should simply call `renderOpenmrsExtension`. However, it should render its
 children once for each extension that will be attached. It should provide one
 `ref` for each extension to attach to, and that ref should be located at the
