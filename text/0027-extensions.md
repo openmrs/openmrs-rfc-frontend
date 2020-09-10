@@ -58,6 +58,11 @@ where many of the below concepts are introduced visually.
 
 ## API Proposal
 
+Applications are registered in the `setupOpenMRS` function of a module. The `pages`
+key should accept an array of objects with the following properties:
+- route: equivalent to current `activate` parameter
+- load: a function that, when called, returns an object with the lifecycle methods
+
 Extensions are registered in the `setupOpenMRS` function of a module. The `extensions`
 key should accept an array of objects with the following properties:
 - name: the unique name of the extension
@@ -67,8 +72,10 @@ key should accept an array of objects with the following properties:
 ```javascript
 function setupOpenMRS() {
   return {
-    lifecycle: () => import("./openmrs-esm-login"),
-    activate: "login",
+    pages: [
+        { route: "login",
+          load: () => import("./openmrs-esm-login") }
+    ],
     extensions: [
         { name: "locationPicker",
           type: "setting",
