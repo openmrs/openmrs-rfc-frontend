@@ -93,12 +93,7 @@ function setupOpenMRS() {
     extensions: [
         { name: "locationPicker",
           type: "setting",
-          load: () => import("./location-picker"),
-          conditions: {
-            privilege: "SomePrivilege"
-            // using the other two condition types in this context is not recommended
-          }
-        }
+          load: () => import("./location-picker") }
     ]
   };
 }
@@ -108,11 +103,11 @@ Extension Slots can be registered in React using the component `ExtensionSlot`
 (and its optional child, `Extension`)
 
 ```jsx
-<ExtensionSlot name="navbarSettings" type="setting" context={ user } />
+<ExtensionSlot name="navbarSettings" type="setting" />
 
 // or to add custom render logic
 
-<ExtensionSlot name="navbarSettings" type="setting" context={ user } >
+<ExtensionSlot name="navbarSettings" type="setting">
   <div className="setting-box">
     <Extension />
   </div>
@@ -128,15 +123,11 @@ renderExtension(
     bindSite: HTMLElement,
     extensionSlotName: string,
     extensionName: string,
-    renderFunction: (lifecycle: Lifecycle) => Lifecycle,
-    context?: {}
+    renderFunction: (lifecycle: Lifecycle) => Lifecycle
 ): CancelLoading
 ```
 
 Where `renderFunction` must both accept and return an object with the lifecycle methods.
-
-`context` is an object whose keys are injected into the execution context of the
-`Conditions.context` string.
 
 Extensions can be associated with extension slots programmatically by calling `attach`
 
@@ -211,22 +202,6 @@ which they were `attach`ed, with `add`ed extensions at the end.
 
 `configure` allows overriding the `config` object passed to `attach`ed extensions.
 It also allows providing conditions for when the extension should attach.
-
-A Conditions object might look like
-
-```js
-{
-  route: "patient-chart",
-  privilege: "ViewPatient",
-  context: "yearsSince(patient.birthDate) > 16"
-}
-```
-
-In the real world, it will in most cases be preferable to avoid "route" and to
-use "privilege" only as needed (here it is clearly superfluous).
-
-The variables available to `context` are provided by the Extension Slot,
-in addition to some small library of utility functions like `yearsSince`.
 
 #### Configuration sources
 
