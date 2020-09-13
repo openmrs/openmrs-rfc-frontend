@@ -118,7 +118,7 @@ Where `renderFunction` must both accept and return an object with the lifecycle 
 Extensions can be associated with extension slots programmatically by calling `attach`
 
 ```javascript
-attach(extensionSlotName: string, extensionName: string): void
+attach(extensionSlotName: string, extensionName: string, extensionConfig?: {}): void
 ```
 
 This can take place either on the extension slot side, or on the exension side
@@ -129,6 +129,9 @@ the `extensionName` must be made unique by suffixing it with `#[extensionId]`,
 where `[extensionId]` is an identifier of the developer's choosing—preferably
 one that is descriptive and human-friendly. So
 `notesWidget#hivNotes` would be a valid value for `extensionName`.
+
+`extensionConfig` overrides the config which the extension receives at that extension
+slot.
 
 Tangentially to all this, `esm-implementer-tools` exports a new React component
 `<ConfigEditButton configPath />`,
@@ -190,7 +193,7 @@ The precedence of configuration sources will be (lowest first):
 - objects provided using the `provide` API
 - a file provided via the import map as `config-file`
 - a file `config.json` in the `fronends/` directory of the application data directory,
-  and which the implementation tools can write to using the "Save to server" button"
+  and which the implementation tools can write to using the "Save to server" button
 - JSON in LocalStorage `openmrsTemporaryConfig`, which implementer-tools uses to store changes made through
   the interface but not yet saved to `config.json`
 
@@ -224,8 +227,10 @@ Next to the "UI Editor" button there should be a "Save to server" button, a
 
 ### Extension Manager
 
-The extension manager doesn't necessarily have to have its own module, but
-it ought to.
+The extension manager is the package
+[@openmrs/esm-extension-manager](https://github.com/openmrs/openmrs-esm-core/tree/master/packages/esm-extension-manager)
+in
+[openmrs-esm-core](https://github.com/openmrs/openmrs-esm-core).
 
 The `<ExtensionSlot />` component
 [should be a](https://reactjs.org/docs/render-props.html#be-careful-when-using-render-props-with-reactpurecomponent)
