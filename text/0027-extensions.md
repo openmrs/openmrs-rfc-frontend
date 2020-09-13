@@ -52,19 +52,6 @@ interface Lifecycle {
 }
 ```
 
-A **conditions object** restricts
-the conditions under which an extension is shown or attached.
-It has keys `route`, `privilege`, and `context`. Each has a string value. In Typescript
-terms we will say
-
-```jsx
-interface Conditions {
-  route: string,
-  privilege: string,
-  context: string
-}
-```
-
 Please see
 [slides 17-end of this presentation](https://docs.google.com/presentation/d/1ParNFdehbBexycC_XzdvpPNXBCea-4GYwAuoPFtvYIY/edit#slide=id.g921ee92cfb_0_2),
 where many of the below concepts are introduced visually.
@@ -81,7 +68,6 @@ key should accept an array of objects with the following properties:
 - name: the unique name of the extension
 - type: the autocomplete type of the extension
 - load: a function that, when called, returns an object with the lifecycle methods
-- conditions: optional; a conditions object
 
 ```javascript
 function setupOpenMRS() {
@@ -132,7 +118,7 @@ Where `renderFunction` must both accept and return an object with the lifecycle 
 Extensions can be associated with extension slots programmatically by calling `attach`
 
 ```javascript
-attach(extensionSlotName: string, extensionName: string, extensionConfig?: {}, condition?: Condition): void
+attach(extensionSlotName: string, extensionName: string): void
 ```
 
 This can take place either on the extension slot side, or on the exension side
@@ -168,16 +154,12 @@ Every module that has extension slots implicitly supports configuration of the f
           {
             "extension": // string, the extension name,  with optional '#id' suffix
             "config": // optional object
-            "condition": // optional Condition
           }
         ],
         "remove": // Array<string>, array of extension IDs
         "order": // Array<string>, array of extension IDs
         "configure": {
-          `extensionId`: {
-            ... // a configuration object suitable for the extension
-            "conditions": // optional Conditions
-          }
+          `extensionId`: // object
         }
       }
     }
@@ -201,7 +183,6 @@ extension slot not to appear.
 which they were `attach`ed, with `add`ed extensions at the end.
 
 `configure` allows overriding the `config` object passed to `attach`ed extensions.
-It also allows providing conditions for when the extension should attach.
 
 #### Configuration sources
 
@@ -209,7 +190,7 @@ The precedence of configuration sources will be (lowest first):
 - objects provided using the `provide` API
 - a file provided via the import map as `config-file`
 - a file `config.json` in the `fronends/` directory of the application data directory,
-  and which the implementation tools can write to using the "Save to server" button
+  and which the implementation tools can write to using the "Save to server" button"
 - JSON in LocalStorage `openmrsTemporaryConfig`, which implementer-tools uses to store changes made through
   the interface but not yet saved to `config.json`
 
@@ -243,7 +224,8 @@ Next to the "UI Editor" button there should be a "Save to server" button, a
 
 ### Extension Manager
 
-The extension manager is in a module in esm-core.
+The extension manager doesn't necessarily have to have its own module, but
+it ought to.
 
 The `<ExtensionSlot />` component
 [should be a](https://reactjs.org/docs/render-props.html#be-careful-when-using-render-props-with-reactpurecomponent)
