@@ -139,7 +139,7 @@ which renders only when the UI Editor is on, and which, when clicked, sends
 the user to the specified config path in the Configuration tab of the dev tools.
 
 ```jsx
-<ConfigEditButton configPath="logo.src" />
+<ConfigEditButton configPath={["@openmrs/esm-login", "logo", "src"]} />
 ```
 
 This uses a framework-agnostic function `goToEditConfig(configPath)`.
