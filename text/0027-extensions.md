@@ -13,10 +13,6 @@ We'll build an UI in a new module `@openmrs/esm-implementer-tools`
 for managing that configuration, which will assist implementers
 in changing the config to add, remove, or reorder extensions.
 
-All servers will have a config file `config.json` in the `frontends` directory
-of the application data directory. This file can be written to by the server,
-and managed through the UI.
-
 ## Definition
 
 An **Extension** is a component with a unique *name* and a *type*.
@@ -53,12 +49,12 @@ interface Lifecycle {
 ```
 
 Please see
-[slides 17-end of this presentation](https://docs.google.com/presentation/d/1ParNFdehbBexycC_XzdvpPNXBCea-4GYwAuoPFtvYIY/edit#slide=id.g921ee92cfb_0_2),
+[these slides](https://docs.google.com/presentation/d/1GmogTn-YSc_TBAvRyakeaBT-7IYsvvUvzZum21LAIOg/edit#slide=id.g1f88252dc4_0_162)
 where many of the below concepts are introduced visually.
 
 ## API Proposal
 
-Applications are registered in the `setupOpenMRS` function of a module. The `pages`
+Pages are registered in the `setupOpenMRS` function of a module. The `pages`
 key should accept an array of objects with the following properties:
 - route: equivalent to current `activate` parameter
 - load: a function that, when called, returns an object with the lifecycle methods
@@ -66,8 +62,10 @@ key should accept an array of objects with the following properties:
 Extensions are registered in the `setupOpenMRS` function of a module. The `extensions`
 key should accept an array of objects with the following properties:
 - name: the unique name of the extension
-- type: the autocomplete type of the extension
 - load: a function that, when called, returns an object with the lifecycle methods
+- type: [optional] the autocomplete type of the extension
+- slot: [optional] the name of a slot to attach to
+- slots: [optional] an array of slots to attach to
 
 ```javascript
 function setupOpenMRS() {
@@ -79,6 +77,7 @@ function setupOpenMRS() {
     extensions: [
         { name: "locationPicker",
           type: "setting",
+          slot: "
           load: () => import("./location-picker") }
     ]
   };
@@ -121,12 +120,12 @@ Extensions can be associated with extension slots programmatically by calling `a
 attach(extensionSlotName: string, extensionName: string): void
 ```
 
-This can take place either on the extension slot side, or on the exension side
-where `setupOpenMRS` is defined.
+This can take place anywhere, but will usually be either on the extension slot side,
+or on the exension side where `setupOpenMRS` is defined.
 
 If the same extension is attached to the same extension slot multiple times,
-the `extensionName` must be made unique by suffixing it with `#[extensionId]`,
-where `[extensionId]` is an identifier of the developer's choosing—preferably
+the `extensionName` must be made unique by suffixing it with `#[idSuffix]`,
+where `[idSuffix]` is an identifier of the developer's choosing—preferably
 one that is descriptive and human-friendly. So
 `notesWidget#hivNotes` would be a valid value for `extensionName`.
 
@@ -150,14 +149,14 @@ Every module that has extension slots implicitly supports configuration of the f
 
 ```js
 {
-  "my-module-name": {
-    "extensions": {
-      `extensionSlotName`: {
+  [moduleName]: {
+    "extensionSlots": {
+      [extensionSlotName]: {
         "add": // Array<string>, array of extension IDs
         "remove": // Array<string>, array of extension IDs
         "order": // Array<string>, array of extension IDs
         "configure": {
-          `extensionId`: // object
+          [extensionId]: // object
         }
       }
     }
@@ -185,8 +184,8 @@ defines. Extensions can obtain their configuration using a new function
 The precedence of configuration sources will be (lowest first):
 - objects provided using the `provide` API
 - a file provided via the import map as `config-file`
-- JSON in LocalStorage `openmrsTemporaryConfig`, which implementer-tools uses to store changes made through
-  the interface but not yet saved to `config.json`
+- JSON in LocalStorage `openmrsTemporaryConfig`, which implementer-tools uses to store
+  changes made through the interface
 
 ## Interface
 
