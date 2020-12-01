@@ -118,7 +118,7 @@ Where `renderFunction` must both accept and return an object with the lifecycle 
 Extensions can be associated with extension slots programmatically by calling `attach`
 
 ```javascript
-attach(extensionSlotName: string, extensionName: string, extensionConfig?: {}): void
+attach(extensionSlotName: string, extensionName: string): void
 ```
 
 This can take place either on the extension slot side, or on the exension side
@@ -133,7 +133,7 @@ one that is descriptive and human-friendly. So
 `extensionConfig` overrides the config which the extension receives at that extension
 slot.
 
-Tangentially to all this, `esm-implementer-tools` exports a new React component
+Tangentially to all this, we have a new React component
 `<ConfigEditButton configPath />`,
 which renders only when the UI Editor is on, and which, when clicked, sends
 the user to the specified config path in the Configuration tab of the dev tools.
@@ -153,12 +153,7 @@ Every module that has extension slots implicitly supports configuration of the f
   "my-module-name": {
     "extensions": {
       `extensionSlotName`: {
-        "add": [
-          {
-            "extension": // string, the extension name,  with optional '#id' suffix
-            "config": // optional object
-          }
-        ],
+        "add": // Array<string>, array of extension IDs
         "remove": // Array<string>, array of extension IDs
         "order": // Array<string>, array of extension IDs
         "configure": {
@@ -173,12 +168,6 @@ Every module that has extension slots implicitly supports configuration of the f
 So the four keys for each extension slot are `add`, `remove`, `order`, and `configure`.
 All are optional. The extension system does not require configuration to work.
 
-`add[i].config` and `configure[extensionId]` both take objects that should 
-satisfy the config schema that the extension's module
-defines. All extensions will receive a parameter `config`, which is prepared by
-`esm-module-config` through a new internal function, `getExtensionConfig`. See
-"Implementation Notes."
-
 `remove` causes and extension which was programmatically `attach`ed to an
 extension slot not to appear.
 
@@ -186,14 +175,16 @@ extension slot not to appear.
 which they were `attach`ed, with `add`ed extensions at the end.
 
 `configure` allows overriding the `config` object passed to `attach`ed extensions.
+The object passed to `configure[extensionId]` should 
+satisfy the config schema that the extension's module
+defines. Extensions can obtain their configuration using a new function
+`getExtensionConfig`, or using the usual React hook, `useConfig`.
 
 #### Configuration sources
 
 The precedence of configuration sources will be (lowest first):
 - objects provided using the `provide` API
 - a file provided via the import map as `config-file`
-- a file `config.json` in the `fronends/` directory of the application data directory,
-  and which the implementation tools can write to using the "Save to server" button
 - JSON in LocalStorage `openmrsTemporaryConfig`, which implementer-tools uses to store changes made through
   the interface but not yet saved to `config.json`
 
@@ -228,7 +219,7 @@ Next to the "UI Editor" button there should be a "Save to server" button, a
 ### Extension Manager
 
 The extension manager is the package
-[@openmrs/esm-extension-manager](https://github.com/openmrs/openmrs-esm-core/tree/master/packages/esm-extension-manager)
+[@openmrs/esm-extensions](https://github.com/openmrs/openmrs-esm-core/tree/master/packages/esm-extensions)
 in
 [openmrs-esm-core](https://github.com/openmrs/openmrs-esm-core).
 
@@ -264,9 +255,9 @@ point.
 
 ## Config
 
-`@openmrs/esm-module-config` will need a few more internal functions. "Internal" here
-means *used only in the initial script, the extension manager, the devtools, or the implementer tools* and
-*not documented in the esm-module-config README*.
+`@openmrs/esm-config` will need a few more internal functions. "Internal" here
+means *used only within openmrs-esm-core* and
+*not documented in the esm-config README*.
 
 #### getExtensionConfig
 
@@ -276,16 +267,10 @@ module. Its values take the following precedence (lowest first):
 
 - values under the extension-defining module's top-level key
 - values under the extension slot -defining module's top-level key, via
-    `extensions[extensionSlotName].add[i].config`
-    or `extensions[extensionSlotName].configure[extensionId]`
+    `extensions[extensionSlotName].configure[extensionId]`
 
-`getExtensionConfig` should be used exclusively by the extension manager, in order to
-populate `params` in the
-[extension-mounting call](https://github.com/openmrs/openmrs-module-spa/blob/0520de2e48d314c80d15b5b7e4ea40c503d8f538/spa/src/extensions.ts#L49)
-
-```javascript
-mountRootParcel(extension, { domElement, ...params });
-```
+Framework-specific wrapper functions should be written. In React, `useConfig` will
+return the extension config when used in an extension.
 
 #### getExtensionSlotConfig
 
@@ -307,7 +292,6 @@ Returns whatever is in the LocalStorage temporary config.
 `setTemporaryConfigValue(path, value)` should update the value in LocalStorage.
 Ideally it should cause the relevant component to re-render.
 
-
 #### unsetTemporaryConfigValue
 
 `unsetTemporaryConfigValue(path)`, the counterpart to `setTemporaryConfigValue`.
@@ -315,11 +299,6 @@ Ideally it should cause the relevant component to re-render.
 #### clearTemporaryConfig
 
 Used by the Implementer Tools "Reset" button.
-
-#### saveConfigFile
-
-`saveConfigFile()` should update the server's `frontends/config.json` file with
-the values in the LocalStorage config JSON.
 
 #### getConfig
 
