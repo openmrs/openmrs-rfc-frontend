@@ -1,0 +1,20 @@
+# Common Reference Widgets
+- Start Date: 2021-08-18
+
+## Decision
+3.0 contributors should reference a shared Reference Widgets list before working on any new widgets or changing existing ones.
+
+Example: If Bob wants to create a new widget that will use table styling, he should first (1) check the styleguide ([om.rs/styleguide](https://om.rs/styleguide)), and (2) look at the Reference Widget for table styling (e.g. we could recommend the [esm-patient-allergies-app](https://github.com/openmrs/openmrs-esm-patient-chart/tree/master/packages/esm-patient-allergies-app)). 
+
+## Definition
+Reference Widget: A widget that applies the styling, layout, and slot useage that we recommend others use in widgets that require a similar layout. 
+
+## Reason for decision
+- Even though we are still a small squad (compared to the global project we want 3.0 to become), we are already seeing noticeable inconsistencies in how widgets look and behave (e.g. the first 3 widgets on the Demo patient summary have different Header spacing, yet they are all table-type widgets)
+
+## Common practices
+- Not sure - others are welcome to mention experience or known other approaches from other frontend projects. 
+
+## Decisions to Make
+Do we want to do this?
+Where should we store a simple MVP? I propose we could start by simply hosting this in a Confluence Wiki page (as has already been done for a [general 3.0 app directory here](https://wiki.openmrs.org/pages/viewpage.action?pageId=256704616)), or as a major section in a GitHub ReadMe in the mono-repos. 
