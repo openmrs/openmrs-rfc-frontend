@@ -39,13 +39,13 @@ We must understand that this approach:
 
 ## Reason for decision
 - Users from >3 organizations have complained to me about the current User Experience of updating widgets, just in the last 24hrs alone. (e.g. https://issues.openmrs.org/browse/MF-725 was also just filed)
-- No one else has brought forward an alternative. I am not aware of other groups incentivized to work on an alternative. 
+- No one else has brought forward a global alternative. I am not aware of other groups incentivized to work on an alternative. 
+- Other teams are creating work-arounds by forcing individual widgets to self-update (see _Alternatives_ section below)
 - We are already behaving as a React-first project - React has become our JS Framework of choice in all widget development. (The only exception is Ampath Forms, which is built in Angular)
 
 
 ## Alternatives
-Explaining the alternatives gives nuance to the decision and shows we considered more than one option.
-
+- One alternative being actively used (in lieu of a global solution) is to add code to individual widgets to force those individual widgets to self-update after a change, as was done in UCSF's [HIV Testing Services Encounter widget here](https://github.com/UCSF-IGHS/openmrs-esm-ohri/blob/226f7b3075fd88861179c0e9675fb1efd5b932f5/src/hts/encounters-list/hts-overview-list.component.tsx#L40)
 
 ## Common practices 
 - Not sure - @brandon @florian what else have you seen done in other settings to handle this problem?
