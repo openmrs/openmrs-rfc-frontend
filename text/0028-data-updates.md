@@ -23,7 +23,7 @@ loading. It vastly improves the data loading/UI performance experience of the 3.
 * How it works: immediately loads cached data, while simultaneously checking for any changes/updates. 
 * Implications: Means user can see updated condition list after they save their change.  
 * *Relevant PR*: This can probably be cleaned up a bit but this should be an accurate 
-    representation of the work done to get use-swr working  https://github.com/openmrs/openmrs-esm-patient-chart/commit/6ab43b9b2ce1ad7a61739fa5baca03f5be9a3b74 
+    representation of the work done to get use-swr working  https://github.com/openmrs/openmrs-esm-patient-chart/commit/4563425a859b8fd65f5546fccb941afda7546bd8 
 
 ### Caveats
 We must understand that this approach:
