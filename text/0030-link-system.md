@@ -22,7 +22,7 @@ Where `to` can include `${variables}` which will be interpolated from
 
 This can be used in an extension definition, for example:
 
-```typescript
+```ts
 function setupOpenMRS() {
   return {
     pages: [],
@@ -44,7 +44,7 @@ function setupOpenMRS() {
 In cases where the extension `meta` property is not required, the
 following could equivalently be used:
 
-```typescript
+```ts
 function setupOpenMRS() {
   return {
     pages: [],
@@ -64,7 +64,7 @@ We will define a new React component, `Menu` (along with
 framework-independent functions that would support it). `Menu` would
 work exactly like `ExtensionSlot`, but only for Links.
 
-```typescript
+```ts
 function Menu(props: { name: string, state?: object });
 ```
 
@@ -97,7 +97,7 @@ For links created in this way, the link label is the ID.
 - We have a proliferation of trivial "link" extensions, which all share
   approximately the same simple structure.
 - Link styling should be left up to the slot/menu. This enforces that
-  links are not bringing their own `class`es.
+  links are not bringing their own CSS classes.
 - We already have an extension system wiring things together, so this
   won't add much complexity to it.
 - All menu-like UI elements should be configurable. At present, developers
