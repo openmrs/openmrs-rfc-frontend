@@ -70,7 +70,8 @@ function Menu(props: { name: string, state?: object });
 
 We will extend the configuration system so that every Menu supports
 the same configuration options as ExtensionSlots, but without `configure`, and
-with the addition of a new key, `create links`:
+with the addition of a new key, `links`, which would allow an implementer
+to add arbitrary links to the Menu:
 
 ```json
 {
@@ -80,7 +81,7 @@ with the addition of a new key, `create links`:
         "add": ["Patient list link"],
         "remove": ["Provider management link"],
         "order": ["Home page link", "Patient list link"],
-        "create links": [{
+        "links": [{
           "label": "Home",
           "to": "${openmrsSpaBase}/home"
         }]
