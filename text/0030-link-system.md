@@ -69,9 +69,15 @@ function Menu(props: { name: string, state?: object });
 ```
 
 We will extend the configuration system so that every Menu supports
-the same configuration options as ExtensionSlots, but without `configure`, and
-with the addition of a new key, `links`, which would allow an implementer
-to add arbitrary links to the Menu:
+the same configuration options as ExtensionSlots.
+
+The `configure` value will support only the key `openInNewTab`.
+`openInNewTab` will default to `true` for external links, `false` otherwise.
+When `true`, it will add `target="_blank"` to the link. If the link is an
+external link, it will also add `rel="noopener noreferrer"`.
+
+Menu configuration will also support one additional key, `links`, which would
+allow an implementer to add arbitrary links to the Menu:
 
 ```json
 {
@@ -84,14 +90,19 @@ to add arbitrary links to the Menu:
         "links": [{
           "label": "Home",
           "to": "${openmrsSpaBase}/home"
-        }]
+        }],
+        "configure": {
+          "Patient list link": {
+            "openInNewTab": true
+          }
+        }
       }
     }
   }
 }
 ```
 
-For links created in this way, the link label is the ID.
+For links created using `links`, the link label is the ID.
 
 ## Reason for decision
 
