@@ -93,7 +93,7 @@ person doing the release without any knowledge of the specifics of that PR.
 
 #### Examples
 ```
-feat!(primary-navigation) feat(login, implementer-tools): A big change in esm-core
+feat!(primary-navigation) feat(login, implementer-tools): O3-999: A big change in esm-core
 ```
 
 ```
@@ -101,7 +101,7 @@ fix(patient-* except patient-chart): A patch change to all the patient chart app
 ```
 
 ```
-feat(apps): A minor change to the apps in openmrs-esm-core
+feat(apps): O3-999: A minor change to the apps in openmrs-esm-core
 ```
 
 ### Release notes
@@ -155,3 +155,6 @@ meets the specifications of this RFC.
 a `CHANGELOG.md` file; the relevant section can be copy-pasted into the
 release notes box on GitHub, and notes about breaking changes can be
 appended manually.
+- Reviewers should be familiar with RFC-22 versioning and should help
+set PR titles appropriately. Pull request authors are not expected
+to be familiar with RFC-22 versioning.
