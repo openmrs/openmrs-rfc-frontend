@@ -41,8 +41,7 @@ function setupOpenMRS() {
 }
 ```
 
-In cases where the extension `meta` property is not required, the
-following could equivalently be used:
+The following could equivalently be used:
 
 ```ts
 function setupOpenMRS() {
@@ -59,6 +58,9 @@ function setupOpenMRS() {
   }
 }
 ```
+
+Where `links` would support all the usual attributes of `extensions`, including
+`offline`, `online`, and `meta`.
 
 We will define a new React component, `Menu` (along with
 framework-independent functions that would support it). `Menu` would
