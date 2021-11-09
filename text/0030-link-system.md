@@ -6,42 +6,15 @@
 
 We will extend the extension system to have support specific to links.
 
-`esm-framework` should define the following function:
-
-```ts
-function createLinkExtension(params: {
-  label: string | () => string | () => Promise<string>,
-  to?: string | () => string | () => Promise<string>,
-  onClick?: (event, props) => void
-}): () => Promise<ReactAppOrParcel<any>>
-```
-
-Where `to` can include `${variables}` which will be interpolated from
-`openmrsBase`, `openmrsSpaBase`, or the extension props; and where
-`onClick` receives extension props as its second argument.
-
-This can be used in an extension definition, for example:
-
-```ts
-function setupOpenMRS() {
-  return {
-    pages: [],
-    extensions: [{
-      id: 'Patient list link',
-      slot: 'App menu',
-      load: createLinkExtension({
-        label: () => t("patientList", "Patient List"),
-        to: "${openmrsSpaBase}/patient-list/${patientUuid}",
-        onClick: (e, { patientUuid }) => {
-          console.log(`Clicked ${e.button} for patient ${patientUuid}`);
-        }
-      })
-    }]
-  }
-}
-```
-
-The following could equivalently be used:
+We will allow a new property of the `setupOpenMRS` return object, called `links`.
+It will be an array of objects which contain
+- `id`: Identifies the link
+- `label`: The text that should appear on the link
+- `to` (optional): The target path or URL. Can include `${variables}` which will be interpolated from
+`openmrsBase`, `openmrsSpaBase`, or the extension props
+- `onClick` (optional): A click handler. Receives extension props as its second argument
+- `menu` or `menus` (optional): Names of menus to attach the link to
+- `offline`, `online`, and `meta` (optional): As in extensions.
 
 ```ts
 function setupOpenMRS() {
@@ -58,9 +31,6 @@ function setupOpenMRS() {
   }
 }
 ```
-
-Where `links` would support all the usual attributes of `extensions`, including
-`offline`, `online`, and `meta`.
 
 We will define a new React component, `Menu` (along with
 framework-independent functions that would support it). `Menu` would
