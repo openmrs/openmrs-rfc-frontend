@@ -22,7 +22,7 @@ Besides the performance part we would also see significant reduction in complexi
 There are some ways we can go alternatively, including:
 
 1. As-is, but with enhancements to the `single-spa-react` connector (would have several downsides and would not provide all the optimizations we look for)
-2. Restricting frontend modules to React exclusively, so any module with components in another language needs either to convert or custom mount their framework / application
+2. Restricting frontend modules to React exclusively, so any module with components in another framework needs either to convert or custom mount their framework / application
 
 The first way would be half-baked again, and comes with some drawbacks (frontend modules would still require recompilation here). The second way would be too much effort on the development side of frontend modules. Ideally, the current development model should not be interrupted in any way / significantly by this proposal.
 
