@@ -13,7 +13,7 @@ Existing distributions / frontend modules should not be impacted - a compatibili
 
 Right now every frontend module registers a couple of components (mostly "extensions" and "pages"). Each component will be rendered using a completely new rendering tree. This comes with some significant overhead as compared to reusing a single rendering tree.
 
-Since most of our components (>= 95%) are React components and since in React its very easy to have a single rendering tree dispatching to multiple DOM nodes (using the `createPortal` API of React) we should consider going to a single rendering tree of React. The other advantage is that the framework agnostic approach has problems with otherwise simple things such as prop updates. While this is fully integrated and highly optimized in React, the framework agnostic approach right now makes the update inefficient.
+Since almost all of our components are React components and since in React its very easy to have a single rendering tree dispatching to multiple DOM nodes (using the `createPortal` API of React) we should move to using only a single React rendering tree. The other advantage is that the framework agnostic approach has problems with otherwise simple things such as prop updates. While this is fully integrated and highly optimized in React, the framework agnostic approach right now makes the update inefficient.
 
 Besides the performance part we would also see significant reduction in complexity. Right now developers need to think in multiple dimensions. For instance, the routing is happening on an *outside* level (using `single-spa`s router) and potentially even on an *inside* level (using, e.g., the `react-router`). While most of the time this works as expected, sometimes weird behavior is observed.
 
