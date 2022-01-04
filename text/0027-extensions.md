@@ -121,7 +121,7 @@ attach(extensionSlotName: string, extensionName: string): void
 ```
 
 This can take place anywhere, but will usually be either on the extension slot side,
-or on the exension side where `setupOpenMRS` is defined.
+or on the extension side where `setupOpenMRS` is defined.
 
 If the same extension is attached to the same extension slot multiple times,
 the `extensionName` must be made unique by suffixing it with `#[idSuffix]`,
