@@ -53,25 +53,26 @@ will update automatically with the new condition.
     The only exception is Ampath Forms, which is built in Angular.
 
 ## Alternatives
-- Add code to individual widgets to force those individual widgets to self-update after a change.
+1. Add code to individual widgets to force those individual widgets to self-update after a change.
     This is already taking place in the absence of a global solution, for example in
     UCSF's [HIV Testing Services Encounter widget](https://github.com/UCSF-IGHS/openmrs-esm-ohri/blob/226f7b3075fd88861179c0e9675fb1efd5b932f5/src/hts/encounters-list/hts-overview-list.component.tsx#L40).
-- Implement a framework-agnostic SWR library based on RxJS. OpenMRS could maintain its own
+1. Implement a framework-agnostic SWR library based on RxJS. OpenMRS could maintain its own
     library which has the same API as React-SWR, but with the addition of APIs supporting
     other frameworks as they become necessary. The basics of it would probably be quite easy
     to implement on top of RxJS. However, React-SWR has many [features](https://github.com/vercel/swr#readme)
     which, if implemented, would add considerably to the complexity of the library. It is
     questionable whether OpenMRS has the engineering capacity to support such a library.
-- Create more explicit caching, such as is used with `useSession` and `useCurrentPatient`.
+1. Create more explicit caching, such as is used with `useSession` and `useCurrentPatient`.
     This is cautioned against in [RFC 13](https://github.com/openmrs/openmrs-rfc-frontend/blob/master/text/0013-api-calls-and-fhir.md).
     There are simply too many different kinds of calls for this to be practical.
-- Create a global data store that caches all data according to the entities represented by that data,
+1. Create a global data store that caches all data according to the entities represented by that data,
     rather than caching by request. This is the approach that was taken for OWAs with
     [openmrs-react-components](https://github.com/openmrs/openmrs-react-components/). The result was
     unmaintainable. To create a robust architecture for doing this would be a very impressive feat
     of engineering, far beyond what would be required for a simple custom SWR implementation.
-- Use the offline system for data caching. All components need to declare their resources in order
+1. Use the offline system for data caching. All components need to declare their resources in order
     to be offline-ready anyway. Once their resources are declared, the data can be cached. However,
     in order for cached data to appear immediately, we would still have to implement a custom SWR
     system on top of the Service Worker cache. It also doesn't help at all with getting data to
     automatically update when new data is available.
+1. Use a different fetching library with cache support. Propose one.
