@@ -44,19 +44,6 @@ will update automatically with the new condition.
     not share the same cache as those written using React.
 2. Will require design for "this content is stale/being updated" for clarity.
 
-### Concerns raised
-* Concern #3: We already use mostly hooks for data fetching (which always reflect the
-    request's life cycle well). Does not help that in most cases we either ignore the
-    error case or simply forward it to the error handler, which only shows a generic message...
-* Concern #4: It does not help with the weight / number of requests that we do right now.
-    Some of these unnecessary requests have already been tamed by proper usage of components
-    (e.g., beforehand we got the patient details like a gazillion times, even though its 
-    only required once on the parent component and can then be passed down).
-* Concern #5: Even more conveniently you can declare the resources on a component and the
-    required data will be present when needed. While this will certainly not work in all
-    cases, many cases would benefit from this approach much more (as these resources are 
-    then auto-covered for offline mode, too).
-
 ## Reason for decision
 - Users from >3 organizations have complained about the current user experience of
     updating widgets. See this [related ticket](https://issues.openmrs.org/browse/MF-725).
