@@ -2,42 +2,49 @@
 - Start Date: 2021/08/18
 
 ## Decision, including impact on distributions
-Example:
-All distributions and modules should use the @openmrs/auth module for authenticating
-requests to the backend REST API.
+
 *Users need* an experience that makes 3.0 feel like it quickly updates with the most
 current information about their patients. 
-*Currently*, if a user adds data about a patient (e.g. adds an allergy, a new condition,
-etc), the user must manually refresh in order to see their change. This does not make
-our application feel very slick. 
 
+*Currently*, if a user adds data about a patient (e.g. adds an allergy, a new condition,
+etc), the user must manually refresh in order to see their change. Refreshes are
+expensive and make for a bad UX.
 
 ## Definition
-- SWR: Stale While Revalidate. A general data fetching pattern. E.g., https://datatracker.ietf.org/doc/html/rfc5861#section-3
-- React-SWR: is a React library, but SWR is just a general data fetching pattern. 
+- SWR: Stale While Revalidate. A data fetching and caching pattern. See [technical description](https://datatracker.ietf.org/doc/html/rfc5861#section-3).
+- React-SWR: A React library for data fetching using SWR. The library is now called "SWR" but
+    for clarity it will be referred to as React-SWR in this document.
 
 ### Background 
-In [*this video/squad call on July 22 2021*](https://iu.mediaspace.kaltura.com/media/t/1_3fu8nt7g?st=642),
-@denniskigen showed using React-SWR to increase the user-perceived speed of data
-loading. It vastly improves the data loading/UI performance experience of the 3.0 app. 
-* How it works: immediately loads cached data, while simultaneously checking for any changes/updates. 
-* Implications: Means user can see updated condition list after they save their change.  
-* *Relevant PR*: This can probably be cleaned up a bit but this should be an accurate 
-    representation of the work done to get use-swr working  https://github.com/openmrs/openmrs-esm-patient-chart/commit/4563425a859b8fd65f5546fccb941afda7546bd8 
+
+In [this video/squad call on July 22, 2021](https://iu.mediaspace.kaltura.com/media/t/1_3fu8nt7g?st=642),
+[Dennis Kigen](https://github.com/denniskigen) demonstrated using React-SWR to perceptibly reduce
+load times for many parts of the page. See the [code](https://github.com/openmrs/openmrs-esm-patient-chart/commit/4563425a859b8fd65f5546fccb941afda7546bd8).
+
+Using SWR, cached data is immediately loaded, while simultaneously checking for any updates.
+
+This has two main implications for user experience:
+- If a component loads and requests data that has already been cached, it immediately displays
+    the cached data before making a new request to check for updates.
+- If a component is displaying data using SWR, and a request is made elsewhere on the page that
+    would cause that data to change, the component makes a new request to receive the refreshed
+    data.
+
+For example, if a user is looking at a condition list and adds a new condition in a form, the list
+will update automatically with the new condition.
+
+> This RFC was proposed in August of 2021. We have since proceeded to adopt React-SWR across
+> the codebase. This RFC has been re-written for clarity in August 2022. It should be adopted
+> as a matter of recording what has actually happened.
 
 ### Caveats
-We must understand that this approach:
-1. is not a silver bullet
-2. only makes sense if we declare React our primary framework and actively shift in that direction
-3. requires removing other approaches like using Rxjs.
-4. will require design for "this content is stale/being updated" for user clarity. 
+
+1. Vercel, the developers of React-SWR, do not seem interested in making React-SWR support
+    frameworks other than React. This means that microfrontends not written using React will
+    not share the same cache as those written using React.
+2. Will require design for "this content is stale/being updated" for clarity.
 
 ### Concerns raised
-* Concern #1: Given we still need to finish 3.0.0, should we focus our effort right now on
-    stabilizing the general 3.0.0 app instead of doing refactoring? 
-* Concern #2: React-SWR would only handle data shown via React. → Should we rearchitect to
-    explicitly decide that react is our primary framework? (So far, we are
-    react-oriented/basically react primary, not necessarily react-only)
 * Concern #3: We already use mostly hooks for data fetching (which always reflect the
     request's life cycle well). Does not help that in most cases we either ignore the
     error case or simply forward it to the error handler, which only shows a generic message...
@@ -50,29 +57,34 @@ We must understand that this approach:
     cases, many cases would benefit from this approach much more (as these resources are 
     then auto-covered for offline mode, too).
 
-
-### Questions
-1. *Lift?* What work would we need to do (or rather, re-do) to use this approach? What
-     refactoring or rearchitecting efforts are required?
-
-
 ## Reason for decision
-- Users from >3 organizations have complained to me about the current User Experience of
-    updating widgets, just in the last 24hrs alone.
-    (e.g. https://issues.openmrs.org/browse/MF-725 was also just filed)
-- No one else has brought forward a global alternative. I am not aware of other groups
-    incentivized to work on an alternative. 
+- Users from >3 organizations have complained about the current user experience of
+    updating widgets. See this [related ticket](https://issues.openmrs.org/browse/MF-725).
 - Other teams are creating work-arounds by forcing individual widgets to self-update
     (see _Alternatives_ section below)
-- We are already behaving as a React-first project - React has become our JS Framework of
-    choice in all widget development. (The only exception is Ampath Forms, which is built
-    in Angular)
-
+- We are already behaving as a React-first project. React is used for all widget development.
+    The only exception is Ampath Forms, which is built in Angular.
 
 ## Alternatives
-- One alternative being actively used (in lieu of a global solution) is to add code to
-    individual widgets to force those individual widgets to self-update after a change,
-    as was done in UCSF's [HIV Testing Services Encounter widget here](https://github.com/UCSF-IGHS/openmrs-esm-ohri/blob/226f7b3075fd88861179c0e9675fb1efd5b932f5/src/hts/encounters-list/hts-overview-list.component.tsx#L40)
-
-## Common practices 
-- Not sure - @brandon @florian what else have you seen done in other settings to handle this problem?
+- Add code to individual widgets to force those individual widgets to self-update after a change.
+    This is already taking place in the absence of a global solution, for example in
+    UCSF's [HIV Testing Services Encounter widget](https://github.com/UCSF-IGHS/openmrs-esm-ohri/blob/226f7b3075fd88861179c0e9675fb1efd5b932f5/src/hts/encounters-list/hts-overview-list.component.tsx#L40).
+- Implement a framework-agnostic SWR library based on RxJS. OpenMRS could maintain its own
+    library which has the same API as React-SWR, but with the addition of APIs supporting
+    other frameworks as they become necessary. The basics of it would probably be quite easy
+    to implement on top of RxJS. However, React-SWR has many [features](https://github.com/vercel/swr#readme)
+    which, if implemented, would add considerably to the complexity of the library. It is
+    questionable whether OpenMRS has the engineering capacity to support such a library.
+- Create more explicit caching, such as is used with `useSession` and `useCurrentPatient`.
+    This is cautioned against in [RFC 13](https://github.com/openmrs/openmrs-rfc-frontend/blob/master/text/0013-api-calls-and-fhir.md).
+    There are simply too many different kinds of calls for this to be practical.
+- Create a global data store that caches all data according to the entities represented by that data,
+    rather than caching by request. This is the approach that was taken for OWAs with
+    [openmrs-react-components](https://github.com/openmrs/openmrs-react-components/). The result was
+    unmaintainable. To create a robust architecture for doing this would be a very impressive feat
+    of engineering, far beyond what would be required for a simple custom SWR implementation.
+- Use the offline system for data caching. All components need to declare their resources in order
+    to be offline-ready anyway. Once their resources are declared, the data can be cached. However,
+    in order for cached data to appear immediately, we would still have to implement a custom SWR
+    system on top of the Service Worker cache. It also doesn't help at all with getting data to
+    automatically update when new data is available.
