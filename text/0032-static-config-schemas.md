@@ -1,6 +1,6 @@
 # Static configuration schemas
 - Start Date: 2026/08/04
-- RFC PR: https://github.com/openmrs/openmrs-rfc-frontend/pull/29
+- RFC PR: https://github.com/openmrs/openmrs-rfc-frontend/pull/33
 
 ## Decision, including impact on distributions
 
