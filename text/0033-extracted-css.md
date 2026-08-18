@@ -1,6 +1,6 @@
 # Extracted CSS
 - Start Date: 2026/07/30
-- RFC PR: https://github.com/openmrs/openmrs-rfc-frontend/pull/TBD
+- RFC PR: https://github.com/openmrs/openmrs-rfc-frontend/pull/34
 
 ## Decision, including impact on distributions
 
