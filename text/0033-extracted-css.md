@@ -9,7 +9,7 @@ Production builds of frontend modules emit CSS as real `.css` assets instead of 
 - The shared build configs use CSS extraction in production and keep `style-loader` in development.
 - Carbon's CSS is delivered exactly once, by the app shell. Frontend module builds must not emit Carbon rule definitions; the build enforces this by checking emitted CSS.
 
-Modules adopt this with a tooling bump — no source changes, no visual changes. Distributions require no changes.
+Modules adopt this with a tooling bump. Distributions should only require changes to ensure that they don't have a CSP that block CSS file from being loaded.
 
 ## Definition
 
