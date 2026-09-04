@@ -1,6 +1,6 @@
 # Extension Preconditions
 - Start Date: 2026/09/04
-- RFC PR: https://github.com/openmrs/openmrs-rfc-frontend/pull/TBD
+- RFC PR: https://github.com/openmrs/openmrs-rfc-frontend/pull/35
 
 ## Decision, including impact on distributions
 
