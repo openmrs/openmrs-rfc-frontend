@@ -33,11 +33,6 @@ interface ExportedWorkspaceProps {
   name: string;
 
   /**
-   * A required key that must be globally unique per instance of <ExportedWorkspace>. This key is used as namespace of the pseudo workspace group that the window is defined in, and thus also namespacing the navigation stack of the workspace window
-   */
-  key: string;
-
-  /**
    * The props passed into the workspace
    */
   workspaceProps: Record;
@@ -69,16 +64,17 @@ interface ExportedWorkspaceProps {
      */
     hasUnsavedChanges: boolean
   }): void;
-});
+}
 ```
 
 ## Reason for decision
 
 - The patient chart apps provide workspaces that are used in other apps. However, workspaces within the patient chart need to have a special pattern with their `windowProps` and `groupProps` that make them unsuitable for use outside the patient chart. To bridge that gap, we created 11 "exported" workspaces, 10 of those strictly for adding / editing encounters. 
   - We can replace these 10 encounter workspaces with one single encounter workspace with `<ExportedWorkspace name={x}>`, with an if-statement to determine the correct workspace `x`, and its window, to open.
+    - In the cases where the exported workspaces differ by expecting additional props, we should be able to rewrite the regular un-exported workspaces to expect those as optional props.
 - The patient chart currently does not support the ability to edit any type of encounters, only visit notes or clinical forms; see [here](https://github.com/openmrs/openmrs-esm-patient-chart/blob/324603e9b2d62756416654585d2e6c1d1653fa14/packages/esm-patient-chart-app/src/visit/visits-widget/single-visit-details/visit-timeline/visit-timeline.component.tsx#L76). The "Edit this encounter" button (in the Visit Timeline or the Encounters table) calls `editEncounter()`, with a hard-coded if-statement to open either the visit notes workspace or the clinical forms workspace. The function also takes in an optional onEditEncounter callback, that serves as an escape hatch for opening a different workspace instead, and is useful when we need to open an "exported" workspace instead in a different app. This is not ideal as it forces other apps to implement similar if-statement logic to open the right workspace to add / edit encounters.
   - Again, this can be simplified by having one encounter workspace with `<ExportedWorkspace name={x}>`, with its own consolidated if-statement logic to determine the correct workspace `x`.
-- An app that heavily uses patient chart workspaces, like the Ward App, needs to not only re-declare each exported workspace for use in its `routes.json`, but also re-define the window -> workspace hierarchies. For example, the patient chart defines the `order-basket` window to contain these workspaces: `order-basket`, `add-drug-order`, `add-lab-order`, `add-general-order`. In the ward app, we needed to define that the `ward-patient-order-basket` window contains similar "exported" workspaces. More recently, the `add-allergy-workspace` was also added to the patient chart's `order-basket` window, and we needed to make corresponding changes to the ward app as well.
+- An app that heavily uses patient chart workspaces, like the Ward App, needs to not only re-declare each exported workspace for use in its `routes.json`, but also re-define the window -> workspace hierarchies. For example, the patient chart defines the `order-basket` window to contain these workspaces: `order-basket`, `add-drug-order`, `add-lab-order`, `add-general-order`. In the ward app, we needed to define that the `ward-patient-order-basket` window contains similar "exported" workspaces.
   - `<ExportedWorkspace>` allows us to simplify this pattern by re-using existing window -> workspace hierarchy wholesale.
 
 ## Alternatives
